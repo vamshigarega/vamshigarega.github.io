@@ -46,6 +46,9 @@
                   <li class="nav-item">
                     <h5><b><a class="nav-link" href="#others" style="color: rgb(247, 246, 241);">Resume</a></b></h5>
                   </li>
+                  <li class="nav-item">
+                    <h5><b><a class="nav-link" href="#contact" style="color: rgb(247, 246, 241);">Contact</a></b></h5>
+                  </li>
               </ul>
               
           </div>
@@ -407,47 +410,57 @@
 
 
 
-<!-- Add this to the head section of your HTML to include Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-
+<!-- Enhanced contact me section -->
 <section id="contact">
-  <div class="container mt-3 contactContent">
-      <h1 class="text" style="color: white;">Contact Me</h1>
-
+    <div class="container mt-3 contactContent" >
+      <h1>Contact Me</h1>
+  
       <div class="row mt-4">
-          <div class="col-lg-4">
-              <!-- to edit google map goto https://www.embed-map.com type your location, generate html code and copy the html  -->
-              <div style="overflow:hidden;max-width:100%;width:500px;height:400px;"><div id="embed-ded-map-canvas" style="height:100%; width:100%;max-width:100%;"><iframe style="height:100%;width:100%;border:0;" frameborder="0" src="https://www.google.com/maps/embed/v1/place?q=San+Marcos&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8"></iframe></div><a class="code-for-google-map" rel="nofollow" href="https://kbj9qpmy.com/bp" id="grab-map-authorization">Internet Provider</a><style>#embed-ded-map-canvas img{max-width:none!important;background:none!important;font-size: inherit;font-weight:inherit;}</style></div>
+        <div class="col-lg-4">
+          <!-- Google Map Embed -->
+          <div style="overflow:hidden;max-width:100%;width:100%;height:400px;">
+            <div id="embed-ded-map-canvas" style="height:100%; width:100%;max-width:100%;">
+              <iframe style="height:100%;width:100%;border:0;" frameborder="0" src="https://www.google.com/maps/embed/v1/place?q=San+Marcos&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8"></iframe>
+            </div>
           </div>
-
-          <div class="col-lg-8">
-            <p class="card-text">
-                <a href="mailto:vamshikrishna9031@gmail.com" class="btn btn-primary">
-                    <i class="fas fa-envelope"></i> Send Email
-                </a>
-            </p>
-            <br>
-            <p class="card-text">
-                <a href="tel:+18303599463" class="btn btn-primary">
-                    <i class="fas fa-phone"></i> Call Now
-                </a>
-            </p>
-          </div>
-
+        </div>
+  
+        <div class="col-lg-8">
+          <form action="send_email.php" method="post">
+            <div class="form-group">
+              <label for="name">Name:</label>
+              <input type="text" class="form-control" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+              <label for="message">Message:</label>
+              <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
+            </div>
+            <a href="mailto:vamshikrishna9031@gmail.com" class="btn btn-primary">
+                <i class="fas fa-envelope"></i> Send Email
+            </a>
+          </form>
+          <p class="card-text">
+            <a href="tel:+18303599463" class="btn btn-primary">
+              <i class="fas fa-phone"></i> Call Now
+            </a>
+          </p>
+        </div>
       </div>
-  </div>
-</section>
+    </div>
+  </section>
+  
+  
 
 <!-- footer section-->
 <footer id="footer">
   <div class="container">
       <!-- social media icons -->
       <div class="social-icons mt-4">
-          <a href="https://www.instagram.com/vamshikrishna.garige/?igsh=ZTV1bjJxb21lencx" target="_blank"><i class="fab fa-instagram"></i></a>
-          <a href="https://www.linkedin.com/in/vamshi-krishna-garega/" target="_blank"><i class="fab fa-linkedin"></i></a>
+          <a href="https://www.instagram.com/vamshikrishna.garige/?igsh=ZTV1bjJxb21lencx" target="_blank"><i class="fab fa-instagram" style="color: aliceblue;"></i></a>
+          <a href="https://www.linkedin.com/in/vamshi-krishna-garega/" target="_blank"><i class="fab fa-linkedin" style="color: aliceblue;"></i></a>
       </div>
   </div>
-  <h5>All Rights Reserved</h5>
+  <h5>@2024 All Rights Reserved.</h5>
 </footer>
 
 </body>
