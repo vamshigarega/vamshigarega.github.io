@@ -20,7 +20,7 @@ navLinks.forEach((l) => {
 });
 
 // Typewriter effect function
-function typeWriter(element, text, delay = 2) {
+function typeWriter(element, text, delay = 4) {
     let i = 0;
     function type() {
         if (i < text.length) {
