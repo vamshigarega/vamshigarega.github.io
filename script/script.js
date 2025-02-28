@@ -36,12 +36,87 @@ document.addEventListener("DOMContentLoaded", function() {
     const heroTitleElement = document.getElementById('hero_title');
     const heroDescElement = document.getElementById('hero_desc');
 
-    const heroTitleText = "Hi, it's me Vamshi !!!";
-    const heroDescText = "Thank you for visiting my portfolio...";
+    const heroTitleText = "Hello, I'm Vamshi";
+    const heroDescriptions = [
+        "Data Engineer | Software Developer",
+        "Transforming Data into Insights",
+        "Building Scalable Cloud Solutions",
+        "AI / ML Enthusiast"
+    ];
+    let currentDescIndex = 0;
 
-    heroTitleElement.innerHTML = '';
-    heroDescElement.innerHTML = '';
+    function updateHeroDesc() {
+        heroDescElement.innerHTML = '';
+        typeWriter(heroDescElement, heroDescriptions[currentDescIndex], 100);
+        currentDescIndex = (currentDescIndex + 1) % heroDescriptions.length;
+    }
 
+    // Initial text animation
     typeWriter(heroTitleElement, heroTitleText, 100);
-    setTimeout(() => typeWriter(heroDescElement, heroDescText, 100), heroTitleText.length * 100);
+    updateHeroDesc();
+
+    // Rotate description text every 4 seconds
+    setInterval(updateHeroDesc, 4000);
+
+    // Remove this line as it's no longer needed
+    // setTimeout(() => typeWriter(heroDescElement, heroDescText, 100), heroTitleText.length * 100);
+});
+
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth'
+        });
+    });
+});
+
+// Add fade-in animation for sections
+const observerOptions = {
+    threshold: 0.1
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('fade-in');
+        }
+    });
+}, observerOptions);
+
+document.querySelectorAll('section').forEach(section => {
+    section.classList.add('hidden');
+    observer.observe(section);
+});
+
+// Handle contact form submission
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const submitButton = this.querySelector('button[type="submit"]');
+    submitButton.disabled = true;
+    submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+
+    const templateParams = {
+        from_name: document.getElementById('name').value,
+        from_email: document.getElementById('email').value,
+        subject: document.getElementById('subject').value,
+        message: document.getElementById('message').value,
+        to_name: 'Vamshi Krishna Garega',
+    };
+
+    emailjs.send('service_g7hxjpd', 'template_5xiobf9', templateParams)
+        .then((response) => {
+            console.log('SUCCESS!', response.status, response.text);
+            alert('Message sent successfully!');
+            this.reset();
+        })
+        .catch((err) => {
+            console.log('FAILED...', err);
+            alert('Failed to send message. Please try again. Error: ' + err.text);
+        })
+        .finally(() => {
+            submitButton.disabled = false;
+            submitButton.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
+        });
 });
