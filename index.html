@@ -60,8 +60,8 @@
       <div class="container-fluid">
           <div class="row">
           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 hero-text">
-              <h1 class="hero_title" id="hero_title">Hi, it's me Vamshi</h1>
-              <h3><p class="hero_desc" id="hero_desc">Thank you for visiting my portfolio...</p></h3>
+              <h1 class="hero_title" id="hero_title"></h1>
+              <h3><p class="hero_desc" id="hero_desc"></p></h3>
           </div>
           </div>
       </div>
@@ -70,24 +70,29 @@
   <!-- about section-->
   <section id="about">
     <div class="container mt-4 pt-4" style="color: aliceblue;">
-        <h1 class="text-center">About Me</h1>
+        <h1 class="text-center section-title">About Me</h1>
         <div class="row mt-4">
             <div class="col-lg-4">
-                <img src="images/profile.jpg" class= "imageAboutPage" alt="">
+                <div class="profile-wrapper">
+                    <img src="images/profile.jpg" class="imageAboutPage" alt="Profile Picture">
+                </div>
             </div>
 
             <div class="col-lg-8">
-                <p style="text-align: justify;">
-                   <br> Hello! I'm Vamshi Krishna Garega, a dedicated and detail-oriented Computer Science graduate with a focus on data engineering and AI research. I completed my Master’s degree in Computer Science at Texas State University, where I have deepened my understanding of data technologies and computational methodologies.
-                </p>
-                <p style="text-align: justify;">
-                    I earned my Bachelor’s degree in Computer Science with a specialization in Artificial Intelligence from Koneru Lakshmaiah Education Foundation. My academic journey has been marked by high achievements, including a strong CGPA and several scholarships, such as the United States Airforce Office of Scientific Research Student Fellowship Grant. As a Graduate Research Assistant at Texas State University, I worked on innovative research projects, developing efficient algorithms and frameworks to tackle complex data challenges. I also gained valuable experience as a Senior Software Analyst at Ernst and Young (EY), where I supported digital transformation projects and honed my problem-solving skills.
-                </p>
-                <p style="text-align: justify;">
-                    However, my passion lies in leveraging data to drive business impact and improve decision-making processes. I thrive in collaborative environments and enjoy working with cross-functional teams to translate complex requirements into effective technical solutions. Outside of my professional interests, I enjoy mentoring peers, reading, listening to music, and engaging in community service.
-                </p>
+                <div class="about-content">
+                    <p style="text-align: justify;">
+                        <br>As a Data Engineer at BrainTrust Partners, I specialize in designing and implementing scalable data solutions across major cloud platforms (AWS, GCP, Azure). My expertise spans big data technologies, including Snowflake and Databricks, where I optimize data processing workflows for maximum efficiency.
+                    </p>
+                    <p style="text-align: justify;">
+                        I lead integrations of Customer Data Platforms and manage complex data pipelines, ensuring robust data activation and identity resolution. My technical toolkit includes infrastructure automation with Terraform, ETL orchestration using Apache Airflow, and data transformation with dbt.
+                    </p>
+                    <p style="text-align: justify;">
+                        With a Master's in Computer Science from Texas State University and published research on adversarial machine learning, I bring a unique blend of academic rigor and practical expertise to solve complex data challenges. I'm passionate about leveraging data to drive business value and innovation.
+                    </p>
+                </div>
             </div>
         </div>
+    </div>
 </section>
 
 <!-- skills section-->
@@ -173,26 +178,36 @@
 </section>
 
 <section id="details">
-    <div class="container mt-4" >
+    <div class="container mt-4">
         <div class="row">
             <div class="col-lg-6 mt-4">
                 <div class="card h-100">
-                    <div class="card-body" style="background-color: bisque;">
-                        <h5 class="card-title"><b><i>Professional Experience</i></b></h5>
-                        <h6 class="card-subtitle mb-2 text-muted">Graduate Research Assistant - Texas State University</h6>
-                        <p class="card-text">Aug 2022 – May 2024</p>
-                        <ul>
-                            <li>Developed and applied the Adversarial Statistical Decision Theory (ASDT) framework for Joint All Domain Command and Control (JADC2), addressing data manipulation threats in a distributed computing environment by focusing on simulation-based optimization methods for United States Air Force requirements.</li>
-                            <li>Utilized Colab and Python libraries to code adversarial game theory models, enhancing the robustness of simulation-based optimization methods.</li>
-                            <li>Implemented efficient algorithms and data processing pipelines to handle large-scale datasets for research projects, optimizing performance and accuracy.</li>
+                    <div class="card-body" style="background: linear-gradient(145deg, #f6f8fa, #e9ecef);">
+                        <h5 class="card-title text-primary"><b><i>Professional Experience</i></b></h5>
+                        
+                        <h6 class="card-subtitle mb-2 text-primary">Data Engineer - BrainTrust Partners</h6>
+                        <p class="card-text text-muted">Jul 2024 – Present</p>
+                        <ul class="list-styled">
+                            <li>Design and maintain scalable data pipelines across AWS, GCP, and Azure platforms</li>
+                            <li>Optimize big data solutions using Snowflake and Databricks for improved processing efficiency</li>
+                            <li>Lead integrations of Customer Data Platforms (Amperity, Treasure Data, Segment)</li>
+                            <li>Implement infrastructure automation using Terraform and YAML</li>
+                            <li>Develop robust ETL workflows with Apache Airflow and dbt</li>
                         </ul>
 
-                        <h6 class="card-subtitle mb-2 text-muted">Senior Software Analyst - Ernst and Young (EY)</h6>
-                        <p class="card-text">Feb 2022 – Jul 2022</p>
-                        <ul>
-                            <li>Supported digital transformation projects by designing and implementing software solutions to meet client needs, ensuring scalability, and maintainability.</li>
-                            <li>Collaborated with cross-functional teams to translate business requirements into technical specifications and solutions.</li>
-                            <li>Developed automated processes for data extraction, transformation, and loading (ETL), enhancing data accessibility and analysis capabilities.</li>
+                        <h6 class="card-subtitle mb-2 text-primary">Graduate Research Assistant - Texas State University</h6>
+                        <p class="card-text text-muted">Aug 2022 – May 2024</p>
+                        <ul class="list-styled">
+                            <li>Led research on Adversarial Statistical Decision Theory (ASDT) for JADC2</li>
+                            <li>Developed simulation-based optimization methods for US Air Force requirements</li>
+                            <li>Published research findings in SPIE conference proceedings</li>
+                        </ul>
+
+                        <h6 class="card-subtitle mb-2 text-primary">Senior Software Analyst - Ernst and Young (EY)</h6>
+                        <p class="card-text text-muted">Feb 2022 – Jul 2022</p>
+                        <ul class="list-styled">
+                            <li>Implemented scalable software solutions for digital transformation projects</li>
+                            <li>Developed automated ETL processes for enhanced data accessibility</li>
                         </ul>
                     </div>
                 </div>
@@ -200,32 +215,48 @@
 
             <div class="col-lg-6 mt-4">
                 <div class="card h-100">
-                    <div class="card-body" style="background-color: rgba(248, 212, 113, 0.979);">
-                        <h5 class="card-title"><b><i>Education and Technical Proficiency</i></b></h5>
-                        <h6 class="card-subtitle mb-2 text-muted">Master’s in Computer Science</h6>
-                        <p class="card-text">Texas State University, CGPA: 3.75/4.0</p>
-                        <p class="card-text">Aug 2022 – May 2024</p>
-                        <ul>
-                            <li>Focused on data engineering, AI research, and advanced computational methodologies.</li>
-                            <li>Received the United States Airforce Office of Scientific Research Student Fellowship Grant for exceptional academic and research achievements.</li>
-                        </ul>
+                    <div class="card-body" style="background: linear-gradient(145deg, #fff3e0, #ffe0b2);">
+                        <h5 class="card-title text-primary"><b><i>Education and Technical Proficiency</i></b></h5>
+                        
+                        <div class="education-section mb-4">
+                            <h6 class="card-subtitle mb-2 text-primary">Master's in Computer Science</h6>
+                            <p class="card-text mb-1"><strong>Texas State University</strong> | CGPA: 3.75/4.0</p>
+                            <p class="card-text text-muted">Aug 2022 – May 2024</p>
+                            <ul class="list-styled">
+                                <li>Focus: Data Engineering, AI Research, Cloud Computing</li>
+                                <li>Research: Adversarial Machine Learning, Data Security</li>
+                            </ul>
+                        </div>
 
-                        <h6 class="card-subtitle mb-2 text-muted">Bachelor’s in Computer Science, Specialization in Artificial Intelligence</h6>
-                        <p class="card-text">Koneru Lakshmaiah Education Foundation, CGPA: 3.76/4.0</p>
-                        <p class="card-text">Jul 2018 – Jun 2022</p>
-                        <ul>
-                            <li>Graduated with distinction, consistently achieving high academic performance.</li>
-                            <li>Developed a solid foundation in AI, machine learning, and data science through coursework and projects.</li>
-                        </ul>
+                        <div class="education-section mb-4">
+                            <h6 class="card-subtitle mb-2 text-primary">Bachelor's in Computer Science</h6>
+                            <p class="card-text mb-1"><strong>Koneru Lakshmaiah Education Foundation</strong> | CGPA: 3.76/4.0</p>
+                            <p class="card-text text-muted">Jul 2018 – Jun 2022</p>
+                            <ul class="list-styled">
+                                <li>Specialization in Artificial Intelligence</li>
+                                <li>Gained Problem solving abilities through Computational programming</li>
+                            </ul>
+                        </div>
 
-                        <h5 class="card-title"><b><i>Technical Skillset</i></b></h5>
-                        <ul>
-                            <li>Programming Languages: C++, Python, Java, Perl</li>
-                            <li>Data Technologies: Hadoop, MySQL, PL/SQL, Oracle, MongoDB</li>
-                            <li>Tools and Environments: PyCharm, Eclipse, VS Code, Jupyter, AWS, EC2, TensorFlow, Jenkins, Docker, Git</li>
-                            <li>Web Development: HTML, CSS, JavaScript, NodeJS</li>
-                            <li>Data Analysis and Visualization: Pandas, NumPy, Matplotlib, Seaborn</li>
-                        </ul>
+                        <div class="technical-skills">
+                            <h5 class="card-title text-primary"><b><i>Technical Expertise</i></b></h5>
+                            <div class="skill-category mb-2">
+                                <h6 class="mb-2">Cloud & Data Technologies</h6>
+                                <p>AWS, GCP, Azure, Snowflake, Databricks, Apache Airflow, dbt</p>
+                            </div>
+                            <div class="skill-category mb-2">
+                                <h6 class="mb-2">Programming & Databases</h6>
+                                <p>Python, Java, SQL, MongoDB, PostgreSQL</p>
+                            </div>
+                            <div class="skill-category mb-2">
+                                <h6 class="mb-2">Tools & Frameworks</h6>
+                                <p>Terraform, Docker, Kubernetes, Git, Jenkins</p>
+                            </div>
+                            <div class="skill-category">
+                                <h6 class="mb-2">Data Analysis</h6>
+                                <p>Pandas, NumPy, Scikit-learn, TensorFlow</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -240,12 +271,21 @@
 <section id="publications">
     <div class="container mt-4">
         <h1 class="text-center" style="color: white;">Publications</h1>
-        <div class="card" style="background-color: rgb(181, 227, 245);">
-            <div class="card-body">
-                <h4 class="card-title">Command and control with poisoned temporal batch data</h4>
-                <p class="card-text" style="text-align: justify;">Abstract : Data manipulation could alter the performance of joint all domain command and-control decisions (JADC2). We present a Bayesian decision theoretic approach for adversarial forecasting when the underlying data collected over time is subject to attack from intelligent adversaries. Proposed adversarial risk analysis-based framework allows incomplete information and uncertainty. We solve the adversary’s poisoning decision problem where he manipulates batch data being inputted into the forecasting method of statistical autoregressive models. The findings show the vulnerability of forecasting models under adversarial activities. We discuss potential defender strategies.</p>
-                <div class="text-center">
-                    <a href="https://doi.org/10.1117/12.2663283" class="btn btn-success">View Publication</a>
+        <div class="card publication-card">
+            <div class="card-body" style="background: linear-gradient(145deg, #2c3e50, #34495e);">
+                <h4 class="card-title" style="color: #fff;">Command and control with poisoned temporal batch data</h4>
+                <div class="publication-tags mb-3">
+                    <span class="badge bg-primary">JADC2</span>
+                    <span class="badge bg-info">Machine Learning</span>
+                    <span class="badge bg-success">Data Security</span>
+                </div>
+                <p class="card-text" style="color: #ecf0f1; text-align: justify;">
+                    <strong style="color: #3498db;">Abstract:</strong> Data manipulation could alter the performance of joint all domain command and-control decisions (JADC2). We present a Bayesian decision theoretic approach for adversarial forecasting when the underlying data collected over time is subject to attack from intelligent adversaries. Proposed adversarial risk analysis-based framework allows incomplete information and uncertainty. We solve the adversary's poisoning decision problem where he manipulates batch data being inputted into the forecasting method of statistical autoregressive models. The findings show the vulnerability of forecasting models under adversarial activities. We discuss potential defender strategies.
+                </p>
+                <div class="text-center mt-4">
+                    <a href="https://doi.org/10.1117/12.2663283" class="btn btn-outline-light" target="_blank">
+                        <i class="fas fa-external-link-alt me-2"></i>View Publication
+                    </a>
                 </div>
             </div>
         </div>
@@ -261,10 +301,19 @@
         <!-- Project 1 -->
         <div class="col-lg-4 col-md-6">
           <div class="card h-100 shadow-sm">
-            <img src="images/dddas_p1.png" class="card-img-top" alt="Adversarial Forecasting Project">
+            <div class="card-img-wrapper">
+                <img src="images/dddas_p1.png" class="card-img-top" alt="Adversarial Forecasting Project">
+                <div class="card-img-overlay">
+                    <div class="tech-stack">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">ML</span>
+                        <span class="tech-tag">ASDT</span>
+                    </div>
+                </div>
+            </div>
             <div class="card-body">
-              <h4 class="card-title">Adversarial Forecasting Within Dynamic Data Driven Application System Framework</h4>
-              <p class="card-text" style="text-align: justify;">
+              <h4 class="card-title">Adversarial Forecasting Within DDDAS Framework</h4>
+              <p class="card-text">
                 Developed and applied the Adversarial Statistical Decision Theory (ASDT) framework for Joint All Domain Command and Control (JADC2), addressing data manipulation threats in a distributed computing environment.
               </p>
             </div>
@@ -274,7 +323,17 @@
         <!-- Project 2 -->
         <div class="col-lg-4 col-md-6">
           <div class="card h-100 shadow-sm">
-            <img src="images/passport_p2.jpg" class="card-img-top" alt="Passport Management System">
+            <div class="card-img-wrapper">
+              <img src="images/passport_p2.jpg" class="card-img-top" alt="Passport Management System">
+              <div class="card-img-overlay">
+                <div class="tech-stack">
+                  <span class="tech-tag">Java</span>
+                  <span class="tech-tag">Kafka</span>
+                  <span class="tech-tag">Spring Boot</span>
+                  <span class="tech-tag">MySQL</span>
+                </div>
+              </div>
+            </div>
             <div class="card-body">
               <h4 class="card-title">Passport Management System</h4>
               <p class="card-text" style="text-align: justify;">
@@ -287,7 +346,17 @@
         <!-- Project 3 -->
         <div class="col-lg-4 col-md-6">
           <div class="card h-100 shadow-sm">
-            <img src="images/textsummarizer_p3.png" class="card-img-top" alt="Text Summarizer Project">
+            <div class="card-img-wrapper">
+              <img src="images/textsummarizer_p3.png" class="card-img-top" alt="Text Summarizer Project">
+              <div class="card-img-overlay">
+                <div class="tech-stack">
+                  <span class="tech-tag">Python</span>
+                  <span class="tech-tag">Django</span>
+                  <span class="tech-tag">NLP</span>
+                  <span class="tech-tag">Beautiful Soup</span>
+                </div>
+              </div>
+            </div>
             <div class="card-body">
               <h4 class="card-title">Text Summarizer</h4>
               <p class="card-text" style="text-align: justify;">
@@ -300,7 +369,17 @@
         <!-- Project 4 -->
         <div class="col-lg-4 col-md-6">
           <div class="card h-100 shadow-sm">
-            <img src="images/notetaking_p4.png" class="card-img-top" alt="Note Taking Application">
+            <div class="card-img-wrapper">
+              <img src="images/notetaking_p4.png" class="card-img-top" alt="Note Taking Application">
+              <div class="card-img-overlay">
+                <div class="tech-stack">
+                  <span class="tech-tag">React Native</span>
+                  <span class="tech-tag">Firebase</span>
+                  <span class="tech-tag">JavaScript</span>
+                  <span class="tech-tag">NoSQL</span>
+                </div>
+              </div>
+            </div>
             <div class="card-body">
               <h4 class="card-title">Note Taking Application</h4>
               <p class="card-text" style="text-align: justify;">
@@ -313,7 +392,17 @@
         <!-- Project 5 -->
         <div class="col-lg-4 col-md-6">
           <div class="card h-100 shadow-sm">
-            <img src="images/machinelearning_p5.jpg" class="card-img-top" alt="Soil Contamination Classification">
+            <div class="card-img-wrapper">
+              <img src="images/machinelearning_p5.jpg" class="card-img-top" alt="Soil Contamination Classification">
+              <div class="card-img-overlay">
+                <div class="tech-stack">
+                  <span class="tech-tag">Python</span>
+                  <span class="tech-tag">Scikit-learn</span>
+                  <span class="tech-tag">Pandas</span>
+                  <span class="tech-tag">ML</span>
+                </div>
+              </div>
+            </div>
             <div class="card-body">
               <h4 class="card-title">Classification of Soil Contamination</h4>
               <p class="card-text" style="text-align: justify;">
@@ -326,7 +415,17 @@
         <!-- Project 6 -->
         <div class="col-lg-4 col-md-6">
           <div class="card h-100 shadow-sm">
-            <img src="images/ecommerce_p6.jpg" class="card-img-top" alt="E-Commerce Website">
+            <div class="card-img-wrapper">
+              <img src="images/ecommerce_p6.jpg" class="card-img-top" alt="E-Commerce Website">
+              <div class="card-img-overlay">
+                <div class="tech-stack">
+                  <span class="tech-tag">Python</span>
+                  <span class="tech-tag">Django</span>
+                  <span class="tech-tag">PostgreSQL</span>
+                  <span class="tech-tag">Redis</span>
+                </div>
+              </div>
+            </div>
             <div class="card-body">
               <h4 class="card-title">E-Commerce Website</h4>
               <p class="card-text" style="text-align: justify;">
@@ -341,11 +440,11 @@
   
   <!-- Honors and Awards Section -->
 <section id="honors">
-  <div class="container mt-4">
-      <!-- <h1 class="text-center" style="color: white;">Honors and Awards</h1> -->
-      <div class="card" style="background-color: gold;">
-          <img class="card-img" src="images/honors.jpg" alt="Card image">
-          <div class="card-body">
+    <div class="container mt-4">
+        <!-- <h1 class="text-center" style="color: white;">Honors and Awards</h1> -->
+        <div class="card" style="background-color: gold;">
+            <img class="card-img" src="images/honors.jpg" alt="Card image">
+            <div class="card-body">
                       <div class="card-body">
                           <h5 class="card-title"><b><i>United States Airforce Office of Scientific Research Student Fellowship Grant (~$16,000)</i></b></h5>
                           <p class="card-text">Awarded for exceptional academic and research achievements, demonstrating a commitment to advancing knowledge in the field of computer science and data engineering.</p>
@@ -403,8 +502,8 @@
 
 <!-- Enhanced contact me section -->
 <section id="contact">
-  <div class="container mt-3 contactContent" >
-    <h1>Contact Me</h1>
+  <div class="container mt-3 contactContent">
+    <h1 class="text-center">Contact Me</h1>
 
     <div class="row mt-4">
       <div class="col-lg-4">
@@ -417,24 +516,39 @@
       </div>
 
       <div class="col-lg-8">
-        <form action="send_email.php" method="post">
-          <div class="form-group">
-            <label for="name">Name:</label>
+        <form id="contactForm">
+          <div class="form-group mb-3">
+            <label for="name" class="form-label">Name:</label>
             <input type="text" class="form-control" id="name" name="name" required>
           </div>
-          <div class="form-group">
-            <label for="message">Message:</label>
+          <div class="form-group mb-3">
+            <label for="email" class="form-label">Email:</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+          </div>
+          <div class="form-group mb-3">
+            <label for="subject" class="form-label">Subject:</label>
+            <input type="text" class="form-control" id="subject" name="subject" required>
+          </div>
+          <div class="form-group mb-3">
+            <label for="message" class="form-label">Message:</label>
             <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
           </div>
-          <a href="mailto:vamshikrishna9031@gmail.com" class="btn btn-primary">
-              <i class="fas fa-envelope"></i> Send Email
-          </a>
+          <button type="submit" class="btn btn-primary">
+            <i class="fas fa-paper-plane"></i> Send Message
+          </button>
         </form>
-        <p class="card-text">
-          <a href="tel:+18303599463" class="btn btn-primary">
-            <i class="fas fa-phone"></i> Call Now
-          </a>
-        </p>
+        
+        <div class="contact-info mt-4">
+          <h4>Other ways to reach me:</h4>
+          <div class="d-flex gap-3 mt-3">
+            <a href="tel:+18303599463" class="btn btn-outline-primary">
+              <i class="fas fa-phone"></i> Call Now
+            </a>
+            <a href="mailto:vamshikrishna9031@gmail.com" class="btn btn-outline-primary">
+              <i class="fas fa-envelope"></i> Direct Email
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -502,8 +616,46 @@
           <a href="https://www.linkedin.com/in/vamshi-krishna-garega/" target="_blank"><i class="fab fa-linkedin" style="color: aliceblue;"></i></a>
       </div>
   </div>
-  <h5>©2024 All Rights Reserved.</h5>
+  <h5>©2025 All Rights Reserved.</h5>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script>
+    (function() {
+        emailjs.init("jODXfU7WROLVmWy1n");
+    })();
+</script>
+<script>
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const submitButton = this.querySelector('button[type="submit"]');
+        submitButton.disabled = true;
+        submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+
+        const templateParams = {
+            name: document.getElementById('name').value,
+            email: document.getElementById('email').value,
+            subject: document.getElementById('subject').value,
+            message: document.getElementById('message').value,
+            reply_to: document.getElementById('email').value
+        };
+
+        emailjs.send('service_g7hxjpd', 'template_cd2gkhh', templateParams)
+            .then(function(response) {
+                console.log('SUCCESS!', response.status, response.text);
+                alert('Message sent successfully!');
+                document.getElementById('contactForm').reset();
+            })
+            .catch(function(error) {
+                console.error('Error:', error);
+                alert('Failed to send message. Error: ' + error.text);
+            })
+            .finally(() => {
+                submitButton.disabled = false;
+                submitButton.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
+            });
+    });
+</script>
 </body>
 </html>
