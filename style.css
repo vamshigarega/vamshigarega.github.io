@@ -6,10 +6,30 @@
     position:relative;
 }
 /* text css above hero image*/
+/* Keep only this hero_title style at the top and remove the other one */
 .hero_title {
     font-size: 4.5rem;
+    background: linear-gradient(
+        to right,
+        #ffffff 20%,
+        #ffd700 40%,
+        #daa520 60%,
+        #ffffff 80%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% auto;
+    animation: shine 4s linear infinite;
+}
+
+@keyframes shine {
+    to {
+        background-position: 200% center;
+    }
 }
 .hero_desc {
+    margin: 10px 0;
     font-size: 2rem;
 }
 .hero-text {
@@ -252,7 +272,9 @@ section h1::after {
 }
 
 /* Gradient text effect for headings */
-.hero_title {
+/* Delete this entire block (around line 274) */
+/* Remove this duplicate .hero_title style and its associated @keyframes gradient */
+/* .hero_title {
     background: linear-gradient(45deg, #fff, #64b5f6, #fff);
     -webkit-background-clip: text;
     background-clip: text;
@@ -271,19 +293,16 @@ section h1::after {
     100% {
         background-position: 0% 50%;
     }
-}
+} */
 /* Professional Experience and Education Section Styling */
 .list-styled li {
     margin-bottom: 8px;
     position: relative;
-    padding-left: 20px;
+    padding-left: 0; /* Remove left padding */
 }
 
 .list-styled li::before {
-    content: "▹";
-    position: absolute;
-    left: 0;
-    color: #0d6efd;
+    content: none; /* Remove the arrow symbol */
 }
 
 .skill-category h6 {
@@ -410,17 +429,26 @@ section h1::after {
 
 /* Project section title enhancement */
 #projects h1 {
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
     position: relative;
     display: inline-block;
-    background: linear-gradient(45deg, #2c3e50, #3498db);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+    color: white;
     font-weight: 600;
+    padding-bottom: 10px;
 }
 
 #projects h1::after {
+    content: '';
+    position: absolute;
+    width: 50%;
+    height: 2px;
+    bottom: 0;
+    left: 25%;
+    background: linear-gradient(to right, transparent, #fff, transparent);
+}
+
+/* Remove this duplicate style block */
+/* #projects h1::after {
     content: '';
     position: absolute;
     bottom: -10px;
@@ -428,7 +456,7 @@ section h1::after {
     width: 100%;
     height: 3px;
     background: linear-gradient(90deg, #2c3e50, #3498db);
-}
+} */
 /* Enhanced about section styling */
 #about {
     padding: 60px 0;
@@ -490,6 +518,7 @@ section h1::after {
     background: linear-gradient(to right, transparent, #fff, transparent);
 }
 /* Honors and Awards Section Styling */
+/* Remove all duplicate Honors and Awards sections and replace with this single block */
 #honors {
     padding: 60px 0;
     background: rgba(0, 0, 0, 0.2);
@@ -498,8 +527,56 @@ section h1::after {
 .awards-container {
     max-width: 1000px;
     margin: 0 auto;
+    padding: 0 20px;
 }
 
+.award-item {
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 15px;
+    padding: 35px;
+    margin-bottom: 30px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.award-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+}
+
+.award-content {
+    padding: 0 15px;
+}
+
+.award-content h4 {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1.8rem;
+    color: #ffd700;
+    margin-bottom: 20px;
+    line-height: 1.4;
+    font-weight: 600;
+}
+
+.award-description {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: #ffffff;
+    margin-bottom: 15px;
+    text-align: justify;
+}
+
+.award-year {
+    font-family: 'Times New Roman', Times, serif;
+    color: #ffd700;
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-top: 10px;
+    display: block;
+}
+
+/* Remove all duplicate styles */
 .award-item {
     display: flex;
     align-items: flex-start;
