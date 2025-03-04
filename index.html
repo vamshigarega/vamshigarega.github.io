@@ -526,10 +526,6 @@
             <input type="email" class="form-control" id="email" name="email" required>
           </div>
           <div class="form-group mb-3">
-            <label for="subject" class="form-label">Subject:</label>
-            <input type="text" class="form-control" id="subject" name="subject" required>
-          </div>
-          <div class="form-group mb-3">
             <label for="message" class="form-label">Message:</label>
             <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
           </div>
@@ -636,7 +632,7 @@
         const templateParams = {
             name: document.getElementById('name').value,
             email: document.getElementById('email').value,
-            subject: document.getElementById('subject').value,
+            subject: 'New Contact Form Message', // Default subject
             message: document.getElementById('message').value,
             reply_to: document.getElementById('email').value
         };
