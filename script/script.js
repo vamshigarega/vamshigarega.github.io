@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const heroTitleElement = document.getElementById('hero_title');
     const heroDescElement = document.getElementById('hero_desc');
 
-    const heroTitleText = "Hello, I'm Vamshi";
+    const heroTitleText = "Hello, I'm Vamshi Garega";
     const heroDescriptions = [
         "Data Engineer | Software Developer",
         "Transforming Data into Insights",
@@ -44,11 +44,21 @@ document.addEventListener("DOMContentLoaded", function() {
         "AI / ML Enthusiast"
     ];
     let currentDescIndex = 0;
+    let intervalId;
 
     function updateHeroDesc() {
-        heroDescElement.innerHTML = '';
-        typeWriter(heroDescElement, heroDescriptions[currentDescIndex], 100);
-        currentDescIndex = (currentDescIndex + 1) % heroDescriptions.length;
+        if (currentDescIndex >= heroDescriptions.length) {
+            // Stop the interval when all descriptions are displayed
+            clearInterval(intervalId);
+            return;
+        }
+
+        const descElement = document.createElement('p');
+        descElement.classList.add('hero_desc');
+        heroDescElement.appendChild(descElement);
+        
+        typeWriter(descElement, heroDescriptions[currentDescIndex], 100);
+        currentDescIndex++;
     }
 
     // Initial text animation
@@ -56,10 +66,7 @@ document.addEventListener("DOMContentLoaded", function() {
     updateHeroDesc();
 
     // Rotate description text every 4 seconds
-    setInterval(updateHeroDesc, 4000);
-
-    // Remove this line as it's no longer needed
-    // setTimeout(() => typeWriter(heroDescElement, heroDescText, 100), heroTitleText.length * 100);
+    intervalId = setInterval(updateHeroDesc, 4000);
 });
 
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
