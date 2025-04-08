@@ -38,7 +38,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
     const heroTitleText = "Hello, I'm Vamshi Garega";
     const heroDescriptions = [
-        "Data Engineer | Software Developer",
+        "Data Engineer | Software Analyst",
+        "Actively looking for Data and Software Roles",
         "Transforming Data into Insights",
         "Building Scalable Cloud Solutions",
         "AI / ML Enthusiast"
