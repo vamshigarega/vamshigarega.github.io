@@ -37,11 +37,19 @@ export const about = [
   "I hold a Master's in Computer Science from Texas State University and a peer-reviewed SPIE publication on adversarial machine learning. I like turning ambiguous problems into shipped, well-engineered systems.",
 ];
 
+// Scale / impact metrics (kept distinct from the hero chips so nothing repeats).
 export const stats = [
-  { value: "9", label: "Production AI agents shipped" },
-  { value: "13+", label: "MCP servers delivered" },
-  { value: "505+", label: "Gateway queries served" },
-  { value: "95.6%", label: "Gateway success rate" },
+  { value: "8", label: "Engineering teams served" },
+  { value: "~350", label: "Production Kubernetes pods" },
+  { value: "2.6M", label: "Lakehouse rows in first 7 days" },
+  { value: "40%", label: "Faster SQL query runtime" },
+];
+
+// Flagship AI / reliability metrics shown as floating chips on the hero image.
+export const heroChips = [
+  { value: "95.6%", label: "gateway success rate" },
+  { value: "9 agents", label: "13+ MCP servers" },
+  { value: "505+", label: "queries served" },
 ];
 
 export type Experience = {
@@ -308,11 +316,10 @@ export const places = [
   },
 ];
 
-// EmailJS configuration for the contact form.
-// These are publishable client-side identifiers (safe to ship).
-// Update them in the EmailJS dashboard if the service or template changes.
-export const emailConfig = {
-  publicKey: "jODXfU7WROLVmWy1n",
-  serviceId: "service_g7hxjpd",
-  templateId: "template_cd2gkhh",
+// Contact form delivery via FormSubmit.co.
+// No signup, no API key, no OAuth that can expire. Messages POST straight to
+// this inbox. ONE-TIME STEP: the first submission after deploy triggers an
+// activation email to this address; click the link once and the form is live.
+export const contact = {
+  formEndpoint: `https://formsubmit.co/ajax/${profile.email}`,
 };

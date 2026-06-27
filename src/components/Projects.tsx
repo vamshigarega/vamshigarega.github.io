@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import Section from "./Section";
 import Reveal from "./Reveal";
+import Tilt from "./Tilt";
 import { projects } from "../data/content";
 
 const icons: Record<string, LucideIcon> = {
@@ -27,8 +28,9 @@ export default function Projects() {
         {projects.map((p, i) => {
           const Icon = icons[p.icon] ?? FileText;
           return (
-            <Reveal key={p.title} delay={(i % 3) * 0.06}>
-              <article className="gloss group flex h-full flex-col overflow-hidden rounded-2xl transition-transform duration-300 hover:-translate-y-1">
+            <Reveal key={p.title} delay={(i % 3) * 0.06} className="h-full">
+              <Tilt className="h-full">
+              <article className="gloss group flex h-full flex-col overflow-hidden rounded-2xl">
                 {/* designed cover */}
                 <div
                   className="relative aspect-[16/10] overflow-hidden"
@@ -78,6 +80,7 @@ export default function Projects() {
                   </div>
                 </div>
               </article>
+              </Tilt>
             </Reveal>
           );
         })}

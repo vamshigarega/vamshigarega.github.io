@@ -1,7 +1,6 @@
 import { useState, type FormEvent } from "react";
-import emailjs from "@emailjs/browser";
 import { Send, CheckCircle2, AlertCircle, Loader2 } from "lucide-react";
-import { emailConfig, profile } from "../data/content";
+import { contact, profile } from "../data/content";
 
 type Status = "idle" | "sending" | "success" | "error";
 
@@ -14,28 +13,42 @@ export default function ContactForm() {
     (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
       setForm((f) => ({ ...f, [field]: e.target.value }));
 
+  // Reliable fallback: open the visitor's mail client prefilled with the message.
+  const mailtoHref = `mailto:${profile.email}?subject=${encodeURIComponent(
+    `Portfolio message from ${form.name || "a visitor"}`,
+  )}&body=${encodeURIComponent(
+    `${form.message}\n\nFrom: ${form.name} (${form.email})`,
+  )}`;
+
   async function onSubmit(e: FormEvent) {
     e.preventDefault();
     if (status === "sending") return;
     setStatus("sending");
     try {
-      await emailjs.send(
-        emailConfig.serviceId,
-        emailConfig.templateId,
-        {
+      const res = await fetch(contact.formEndpoint, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
           name: form.name,
           email: form.email,
-          reply_to: form.email,
-          subject: `Portfolio message from ${form.name}`,
           message: form.message,
-          to_name: profile.name,
-        },
-        { publicKey: emailConfig.publicKey },
-      );
-      setStatus("success");
-      setForm({ name: "", email: "", message: "" });
+          _subject: `Portfolio message from ${form.name}`,
+          _template: "table",
+          _captcha: "false",
+        }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (res.ok && (data.success === "true" || data.success === true)) {
+        setStatus("success");
+        setForm({ name: "", email: "", message: "" });
+      } else {
+        setStatus("error");
+      }
     } catch (err) {
-      console.error("EmailJS error:", err);
+      console.error("Contact form error:", err);
       setStatus("error");
     }
   }
@@ -118,10 +131,17 @@ export default function ContactForm() {
         </p>
       )}
       {status === "error" && (
-        <p className="flex items-center gap-2 text-sm text-red-400">
-          <AlertCircle size={16} /> Something went wrong. Please email me directly at{" "}
-          {profile.email}.
-        </p>
+        <div className="flex flex-col gap-2 text-sm">
+          <p className="flex items-center gap-2 text-amber-400">
+            <AlertCircle size={16} /> Direct send is unavailable right now.
+          </p>
+          <a
+            href={mailtoHref}
+            className="font-medium text-accent-soft underline-offset-2 hover:underline"
+          >
+            Tap here to send it from your email app instead.
+          </a>
+        </div>
       )}
     </form>
   );

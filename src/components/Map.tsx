@@ -2,9 +2,9 @@ import { MapPin } from "lucide-react";
 import { places } from "../data/content";
 import { useTheme } from "../theme/ThemeContext";
 
-// Keyless Google Maps embed centered on the Austin / San Marcos area.
+// Keyless Google Maps embed framed to show both Austin and San Marcos.
 const SRC =
-  "https://maps.google.com/maps?q=Austin,Texas&t=&z=9&ie=UTF8&iwloc=&output=embed";
+  "https://maps.google.com/maps?ll=30.05,-97.87&q=Austin,Texas&z=9&output=embed";
 
 export default function Map() {
   const { theme } = useTheme();
@@ -20,7 +20,7 @@ export default function Map() {
         style={{
           filter:
             theme === "dark"
-              ? "invert(0.92) hue-rotate(180deg) brightness(0.9) contrast(0.92) saturate(0.85)"
+              ? "invert(1) hue-rotate(190deg) brightness(0.92) contrast(0.9) saturate(0.7)"
               : "none",
         }}
       />

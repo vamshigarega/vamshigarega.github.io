@@ -1,5 +1,6 @@
 import Section from "./Section";
 import Reveal from "./Reveal";
+import Counter from "./Counter";
 import { about, stats, profile } from "../data/content";
 import profileImg from "../assets/img/profile.jpg";
 
@@ -43,7 +44,7 @@ export default function About() {
               <Reveal key={s.label} delay={0.1 + i * 0.06}>
                 <div className="gloss h-full rounded-2xl p-4">
                   <div className="text-2xl font-semibold tracking-tight text-snow sm:text-3xl">
-                    {s.value}
+                    <Counter value={s.value} />
                   </div>
                   <div className="mt-1 text-xs leading-snug text-mist">
                     {s.label}
