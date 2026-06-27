@@ -34,7 +34,9 @@ export default function About() {
           <div className="space-y-5">
             {about.map((p, i) => (
               <Reveal key={i} delay={i * 0.08}>
-                <p className="text-base leading-relaxed text-fog sm:text-lg">{p}</p>
+                <p className="text-base leading-relaxed text-fog text-justify sm:text-lg">
+                  {p}
+                </p>
               </Reveal>
             ))}
           </div>

@@ -1,10 +1,17 @@
 // Single source of truth for portfolio content.
 // Real, defensible facts only. No invented metrics. No em or en dashes.
 
+import projAdversarial from "../assets/img/projects/adversarial-forecasting.jpg";
+import projPassport from "../assets/img/projects/passport-system.jpg";
+import projSummarizer from "../assets/img/projects/text-summarizer.jpg";
+import projNote from "../assets/img/projects/note-taking.jpg";
+import projSoil from "../assets/img/projects/soil-classification.jpg";
+import projEcommerce from "../assets/img/projects/ecommerce.jpg";
+
 export const profile = {
   name: "Vamshi Krishna Garega",
   shortName: "Vamshi Garega",
-  initials: "VKG",
+  initials: "VG",
   role: "AI Engineer",
   tagline: "I build LLM agents, MCP servers, and large-scale data systems.",
   location: "Austin, Texas",
@@ -69,11 +76,11 @@ export const experience: Experience[] = [
     location: "Austin, Texas",
     current: true,
     points: [
-      "Built and shipped 9 production AI agents and 13+ MCP servers (Anthropic Claude SDK, Google ADK) on Python, FastAPI, and Kubernetes for 8 internal engineering teams.",
-      "Engineered a central MCP gateway that serves 505+ queries at a 95.6% success rate and became the team's standard integration pattern.",
-      "Worked full-stack across React / TypeScript front ends and FastAPI / Django back ends, including a real-time AI alerting system on Airflow and Slack.",
-      "Designed distributed data pipelines (Apache Airflow, Iceberg + Trino) powering Apple's hardware manufacturing analytics across 9 product lines.",
-      "Owned CI/CD and reliability, leading a zero-downtime migration of 6 production agents across cloud regions.",
+      "Designed, built, and shipped 9 production AI agents and 13+ MCP servers (Anthropic Claude SDK, Google ADK) on Python, FastAPI, and Kubernetes for 8 internal engineering teams.",
+      "Built a central MCP gateway (OAuth 2.0 / OIDC) that became the team's standard integration pattern, serving 505+ queries at a 95.6% success rate.",
+      "Shipped a real-time AI alerting system on Airflow and Slack that delivered 79 alerts on its first run, and authored agent / MCP bootstrap templates that cut new-service onboarding from days to roughly 3 hours.",
+      "Onboarded the team to a Data Lakehouse (Apache Iceberg + Trino), ingesting 2.6M rows in the first 7 days, and authored 19 production Airflow DAGs across 9 product lines.",
+      "Led a zero-downtime migration of 6 production agents across cloud regions and owned CI/CD across UI, backend, MCP, and ML-parser services.",
     ],
   },
   {
@@ -180,10 +187,8 @@ export type Project = {
   title: string;
   description: string;
   tags: string[];
-  // Lucide icon name + a two-stop gradient used to render a designed cover.
-  icon: string;
-  from: string;
-  to: string;
+  icon: string; // small lucide badge
+  image: string; // relevant cover photo
 };
 
 export const projects: Project[] = [
@@ -193,8 +198,7 @@ export const projects: Project[] = [
       "Applied the Adversarial Statistical Decision Theory (ASDT) framework to Joint All-Domain Command and Control (JADC2), addressing data-manipulation threats in a distributed, dynamic computing environment.",
     tags: ["Python", "Machine Learning", "ASDT", "Research"],
     icon: "ShieldAlert",
-    from: "#4f46e5",
-    to: "#7c3aed",
+    image: projAdversarial,
   },
   {
     title: "Passport Management System",
@@ -202,8 +206,7 @@ export const projects: Project[] = [
       "A passport-management platform using Kafka queues for real-time processing of passport data, improving the efficiency and accuracy of issuance and tracking.",
     tags: ["Java", "Kafka", "Spring Boot", "MySQL"],
     icon: "Waypoints",
-    from: "#0ea5e9",
-    to: "#2563eb",
+    image: projPassport,
   },
   {
     title: "Text Summarizer",
@@ -211,8 +214,7 @@ export const projects: Project[] = [
       "An NLP application built with Django that generates concise summaries from web pages and text, using Beautiful Soup for scraping and extractive summarization.",
     tags: ["Python", "Django", "NLP", "Beautiful Soup"],
     icon: "FileText",
-    from: "#8b5cf6",
-    to: "#d946ef",
+    image: projSummarizer,
   },
   {
     title: "Note Taking Application",
@@ -220,8 +222,7 @@ export const projects: Project[] = [
       "A cross-platform note-taking app built with React Native and Google Firebase, with a clean interface for capturing and organizing day-to-day events.",
     tags: ["React Native", "Firebase", "JavaScript", "NoSQL"],
     icon: "NotebookPen",
-    from: "#14b8a6",
-    to: "#0ea5e9",
+    image: projNote,
   },
   {
     title: "Soil Contamination Classification",
@@ -229,8 +230,7 @@ export const projects: Project[] = [
       "Analyzed soil data to classify contamination levels using Decision Trees, Random Forest, and Support Vector Machines, with feature engineering and model comparison.",
     tags: ["Python", "Scikit-learn", "Pandas", "ML"],
     icon: "FlaskConical",
-    from: "#10b981",
-    to: "#6366f1",
+    image: projSoil,
   },
   {
     title: "E-Commerce Platform",
@@ -238,8 +238,7 @@ export const projects: Project[] = [
       "A dynamic e-commerce platform built with Python and Django, integrating order management, real-time inventory tracking, and caching for performance.",
     tags: ["Python", "Django", "PostgreSQL", "Redis"],
     icon: "ShoppingBag",
-    from: "#6366f1",
-    to: "#3b82f6",
+    image: projEcommerce,
   },
 ];
 
@@ -285,7 +284,7 @@ export const education = [
   },
   {
     degree: "B.Tech in Computer Science (AI Specialization)",
-    school: "Koneru Lakshmaiah Education Foundation, India",
+    school: "KL University, India",
     detail: "CGPA 3.76 / 4.0",
     period: "July 2018 - June 2022",
   },

@@ -291,6 +291,17 @@ body {
   }
 }
 
+/* Floating particles (ambient motion) */
+@keyframes floaty {
+  0%,
+  100% {
+    transform: translateY(0) translateX(0);
+  }
+  50% {
+    transform: translateY(var(--drift, -20px)) translateX(6px);
+  }
+}
+
 /* Soft pulse for the live availability dot */
 @keyframes softping {
   0% {

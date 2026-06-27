@@ -1,17 +1,26 @@
-/** Ambient Apple-Noir backdrop: deep base, two slow aurora glows, fine grid,
- *  and a subtle grain layer. Purely decorative and pointer-transparent. */
+import Particles from "./Particles";
+
+/** Ambient Apple-Noir backdrop: deep base, drifting aurora mesh, floating
+ *  particles, fine grid, and grain. Purely decorative and pointer-transparent. */
 export default function Background() {
   return (
     <div
       aria-hidden
       className="pointer-events-none fixed inset-0 -z-10 overflow-hidden bg-ink"
     >
-      {/* aurora glows */}
-      <div className="animate-drift absolute -left-40 -top-40 h-[42rem] w-[42rem] rounded-full bg-accent/15 blur-[120px]" />
+      {/* aurora mesh glows */}
+      <div className="animate-drift absolute -left-40 -top-40 h-[42rem] w-[42rem] rounded-full bg-accent/20 blur-[120px]" />
       <div
-        className="animate-drift absolute -bottom-52 -right-32 h-[40rem] w-[40rem] rounded-full bg-accent-2/12 blur-[130px]"
+        className="animate-drift absolute -bottom-52 -right-32 h-[40rem] w-[40rem] rounded-full bg-accent-2/16 blur-[130px]"
         style={{ animationDelay: "-9s" }}
       />
+      <div
+        className="animate-drift absolute left-1/2 top-1/3 h-[34rem] w-[34rem] -translate-x-1/2 rounded-full bg-accent-soft/12 blur-[140px]"
+        style={{ animationDelay: "-5s", animationDuration: "26s" }}
+      />
+
+      {/* floating particles */}
+      <Particles count={32} />
 
       {/* fine grid */}
       <div

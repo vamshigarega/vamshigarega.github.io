@@ -121,11 +121,13 @@ export default function Hero() {
           initial={{ opacity: 0, scale: 0.92, y: 24 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.25, ease }}
-          className="relative hidden lg:block"
+          className="relative mx-auto w-full max-w-sm lg:max-w-none"
+          style={{ perspective: 1200 }}
         >
           <motion.div
-            animate={{ y: [0, -12, 0] }}
-            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+            animate={{ y: [0, -14, 0], rotateY: [-6, 6, -6], rotateX: [3, -3, 3] }}
+            transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
+            style={{ transformStyle: "preserve-3d" }}
           >
             <Tilt max={9}>
               <div className="relative rounded-3xl [transform-style:preserve-3d]">
@@ -158,8 +160,8 @@ export default function Hero() {
                   className="absolute bottom-4 left-4 rounded-xl border border-white/15 bg-black/45 px-3.5 py-2 shadow-lg shadow-black/40 backdrop-blur-md"
                   style={{ transform: "translateZ(80px)" }}
                 >
-                  <div className="text-lg font-semibold text-white">~350</div>
-                  <div className="text-[11px] text-white/70">K8s pods</div>
+                  <div className="text-lg font-semibold text-white">505+</div>
+                  <div className="text-[11px] text-white/70">queries served</div>
                 </div>
               </div>
             </Tilt>

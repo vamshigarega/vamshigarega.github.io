@@ -19,7 +19,7 @@ export default function Section({
   return (
     <section
       id={id}
-      className={`relative mx-auto max-w-6xl scroll-mt-24 px-6 py-24 sm:py-28 ${className}`}
+      className={`relative mx-auto max-w-6xl scroll-mt-24 px-6 py-14 sm:py-20 ${className}`}
     >
       {(eyebrow || title) && (
         <Reveal className="mb-14">
