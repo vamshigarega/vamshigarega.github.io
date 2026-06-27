@@ -1,0 +1,317 @@
+@import "tailwindcss";
+
+/* ============================================================
+   Apple-grade Noir - dual-theme design tokens
+   Tailwind v4 @theme tokens map to runtime CSS variables so the
+   whole palette flips between dark and light.
+   ============================================================ */
+@theme {
+  --color-ink: var(--bg);
+  --color-ink-2: var(--bg-2);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-line: var(--line);
+  --color-mist: var(--mist);
+  --color-fog: var(--fog);
+  --color-snow: var(--snow);
+
+  --color-accent: var(--accent);
+  --color-accent-2: var(--accent-2);
+  --color-accent-soft: var(--accent-soft);
+
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui,
+    sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ---- Dark theme (default) ---- */
+:root,
+:root[data-theme="dark"] {
+  --bg: #0a0a0b;
+  --bg-2: #0e0e10;
+  --surface: #131316;
+  --surface-2: #18181c;
+  --line: #26262c;
+  --mist: #a1a1aa;
+  --fog: #d4d4d8;
+  --snow: #f4f4f5;
+
+  --accent: #6e8bff;
+  --accent-2: #8b5cf6;
+  --accent-soft: #82a0ff;
+
+  --panel-bg: rgba(255, 255, 255, 0.025);
+  --panel-bg-hover: rgba(255, 255, 255, 0.05);
+  --hairline: rgba(255, 255, 255, 0.09);
+  --hairline-strong: rgba(255, 255, 255, 0.16);
+  --glass-bg: rgba(18, 18, 22, 0.65);
+  --chip-bg: rgba(255, 255, 255, 0.04);
+  --grid-rgb: 255, 255, 255;
+  --sheen: rgba(255, 255, 255, 0.07);
+  --shadow: rgba(0, 0, 0, 0.5);
+  color-scheme: dark;
+}
+
+/* ---- Light theme ---- */
+:root[data-theme="light"] {
+  --bg: #f6f7f9;
+  --bg-2: #eef0f3;
+  --surface: #ffffff;
+  --surface-2: #f3f4f6;
+  --line: #e3e5ea;
+  --mist: #5b616e;
+  --fog: #3a3f4a;
+  --snow: #14161c;
+
+  --accent: #4f6bf6;
+  --accent-2: #7c3aed;
+  --accent-soft: #4257d6;
+
+  --panel-bg: rgba(255, 255, 255, 0.7);
+  --panel-bg-hover: rgba(255, 255, 255, 0.95);
+  --hairline: rgba(15, 18, 30, 0.08);
+  --hairline-strong: rgba(15, 18, 30, 0.16);
+  --glass-bg: rgba(255, 255, 255, 0.72);
+  --chip-bg: rgba(15, 18, 30, 0.035);
+  --grid-rgb: 20, 22, 35;
+  --sheen: rgba(255, 255, 255, 0.9);
+  --shadow: rgba(20, 22, 40, 0.12);
+  color-scheme: light;
+}
+
+/* ============================================================
+   Base
+   ============================================================ */
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--fog);
+  font-family: var(--font-sans);
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  overflow-x: hidden;
+  transition: background-color 0.5s var(--ease-out-expo), color 0.5s var(--ease-out-expo);
+}
+
+::selection {
+  background: color-mix(in srgb, var(--accent) 35%, transparent);
+  color: #fff;
+}
+
+::-webkit-scrollbar {
+  width: 11px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--line);
+  border-radius: 999px;
+  border: 3px solid var(--bg);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in srgb, var(--line) 60%, var(--mist));
+}
+
+/* ============================================================
+   Component helpers (theme-aware)
+   ============================================================ */
+@layer components {
+  .panel {
+    background: var(--panel-bg);
+    border: 1px solid var(--hairline);
+    border-radius: 1rem;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  /* Glossy card: subtle top sheen + depth, premium feel */
+  .gloss {
+    position: relative;
+    background:
+      linear-gradient(
+        180deg,
+        color-mix(in srgb, var(--sheen) 60%, transparent),
+        transparent 18%
+      ),
+      var(--panel-bg);
+    border: 1px solid var(--hairline);
+    box-shadow:
+      0 1px 0 0 var(--sheen) inset,
+      0 20px 40px -24px var(--shadow);
+    transition: border-color 0.4s var(--ease-out-expo),
+      transform 0.4s var(--ease-out-expo), box-shadow 0.4s var(--ease-out-expo);
+  }
+  .gloss:hover {
+    border-color: var(--hairline-strong);
+    box-shadow:
+      0 1px 0 0 var(--sheen) inset,
+      0 30px 60px -28px var(--shadow);
+  }
+
+  .glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid var(--hairline);
+  }
+
+  .glass-card {
+    background: var(--panel-bg);
+    border: 1px solid var(--hairline);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .chip {
+    background: var(--chip-bg);
+    border: 1px solid var(--hairline);
+  }
+
+  .btn-solid {
+    background: var(--snow);
+    color: var(--bg);
+  }
+
+  .btn-outline {
+    border: 1px solid var(--hairline-strong);
+    color: var(--snow);
+    background: transparent;
+    transition: all 0.3s var(--ease-out-expo);
+  }
+  .btn-outline:hover {
+    border-color: color-mix(in srgb, var(--accent) 60%, transparent);
+    background: color-mix(in srgb, var(--accent) 10%, transparent);
+  }
+}
+
+/* ============================================================
+   Utilities
+   ============================================================ */
+@layer utilities {
+  .text-gradient {
+    background: linear-gradient(
+      120deg,
+      var(--snow) 0%,
+      var(--accent-soft) 55%,
+      var(--accent-2) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .text-gradient-anim {
+    background: linear-gradient(
+      110deg,
+      var(--snow) 0%,
+      var(--accent-soft) 38%,
+      var(--accent-2) 52%,
+      var(--accent-soft) 66%,
+      var(--snow) 100%
+    );
+    background-size: 220% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: sheen 7s linear infinite;
+  }
+
+  .border-line {
+    border-color: var(--hairline);
+  }
+
+  .mask-fade-x {
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent,
+      #000 8%,
+      #000 92%,
+      transparent
+    );
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      #000 8%,
+      #000 92%,
+      transparent
+    );
+  }
+}
+
+/* ============================================================
+   Motion
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.animate-marquee {
+  animation: marquee 40s linear infinite;
+}
+
+@keyframes drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(4%, -3%, 0) scale(1.08);
+  }
+}
+.animate-drift {
+  animation: drift 20s ease-in-out infinite;
+}
+
+/* Animated gradient sheen sweeping across the hero headline */
+@keyframes sheen {
+  to {
+    background-position: 200% center;
+  }
+}
+
+/* Floating particles (ambient motion) */
+@keyframes floaty {
+  0%,
+  100% {
+    transform: translateY(0) translateX(0);
+  }
+  50% {
+    transform: translateY(var(--drift, -20px)) translateX(6px);
+  }
+}
+
+/* Soft pulse for the live availability dot */
+@keyframes softping {
+  0% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  75%,
+  100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+
