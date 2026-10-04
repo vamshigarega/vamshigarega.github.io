@@ -185,6 +185,10 @@ darker than the CSS color it is meant to match (see `PAINT` in the scenes).
 - **No holes.** A grid never ends with a lone card beside an empty cell (run
   the odd card full width), and a card is never stretched far past its content
   to match a taller neighbor (pair long with short, or change the split).
+- **Dark is the default.** A first visit opens dark, whatever the device is
+  set to. Only a choice made with the site's own toggle is remembered
+  (`theme-choice` in localStorage; the key lives in `ThemeContext.tsx` and in
+  the inline script in `index.html`, keep the two the same).
 - **Both themes are one page each.** Nothing stays dark on the light theme or
   light on the dark one. The footage bands are veiled in the page background
   (`--band-veil`) and fade out at their top and bottom edges.

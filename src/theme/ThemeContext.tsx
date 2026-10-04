@@ -16,6 +16,11 @@ type ThemeContextValue = {
 
 const ThemeContext = createContext<ThemeContextValue | null>(null);
 
+// Dark is the default: a first visit opens dark whatever the device is set
+// to. Only a choice the visitor makes with the toggle is remembered, under
+// this key (the inline script in index.html reads the same one).
+const THEME_KEY = "theme-choice";
+
 function readInitial(): Theme {
   if (typeof document === "undefined") return "dark";
   const attr = document.documentElement.getAttribute("data-theme");
@@ -27,17 +32,17 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
-    try {
-      localStorage.setItem("theme", theme);
-    } catch {
-      /* ignore */
-    }
   }, [theme]);
 
-  const toggle = useCallback(
-    () => setTheme((t) => (t === "dark" ? "light" : "dark")),
-    [],
-  );
+  const toggle = useCallback(() => {
+    const next = theme === "dark" ? "light" : "dark";
+    setTheme(next);
+    try {
+      localStorage.setItem(THEME_KEY, next);
+    } catch {
+      /* private mode or blocked storage: the choice lasts for this visit */
+    }
+  }, [theme]);
 
   return (
     <ThemeContext.Provider value={{ theme, toggle }}>

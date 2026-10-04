@@ -89,8 +89,13 @@
       // Set theme before paint to avoid a flash of the wrong theme.
       (function () {
         try {
-          // Dark by default; only honor an explicit saved preference.
-          var saved = localStorage.getItem("theme");
+          // Dark is the default, whatever the device is set to. Only a choice
+          // made with this site's own toggle is honored ("theme-choice", the
+          // same key as in src/theme/ThemeContext.tsx). The older site saved a
+          // theme under "theme" on every visit; that value is not a choice
+          // made here, so it is dropped.
+          localStorage.removeItem("theme");
+          var saved = localStorage.getItem("theme-choice");
           var theme = saved === "light" ? "light" : "dark";
           document.documentElement.setAttribute("data-theme", theme);
         } catch (e) {
