@@ -1,253 +1,585 @@
 @import "tailwindcss";
 
 /* ============================================================
-   Apple-grade Noir - dual-theme design tokens
-   Tailwind v4 @theme tokens map to runtime CSS variables so the
-   whole palette flips between dark and light.
+   Keynote - design tokens
+   True black, white type, hairlines, and one spectrum that is
+   spent only on the moments that matter. Tailwind v4 @theme
+   tokens map to runtime CSS variables so the palette flips
+   between dark and light.
    ============================================================ */
 @theme {
-  --color-ink: var(--bg);
-  --color-ink-2: var(--bg-2);
+  --color-bg: var(--bg);
+  --color-raise: var(--raise);
   --color-surface: var(--surface);
-  --color-surface-2: var(--surface-2);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
   --color-line: var(--line);
-  --color-mist: var(--mist);
-  --color-fog: var(--fog);
-  --color-snow: var(--snow);
-
+  --color-line-strong: var(--line-strong);
   --color-accent: var(--accent);
-  --color-accent-2: var(--accent-2);
-  --color-accent-soft: var(--accent-soft);
 
-  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui,
-    sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --font-sans: "Inter Variable", "Inter", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono Variable", "JetBrains Mono", ui-monospace,
+    "SF Mono", Menlo, monospace;
 
-  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --container-page: 82rem;
 }
 
-/* ---- Dark theme (default) ---- */
 :root,
 :root[data-theme="dark"] {
-  --bg: #0a0a0b;
-  --bg-2: #0e0e10;
-  --surface: #131316;
-  --surface-2: #18181c;
-  --line: #26262c;
-  --mist: #a1a1aa;
-  --fog: #d4d4d8;
-  --snow: #f4f4f5;
+  --bg: #050506;
+  --raise: #0b0b0d;
+  --surface: #111114;
+  --ink: #f5f5f7;
+  --muted: #a1a1a6;
+  --faint: #6e6e73;
+  --line: rgba(255, 255, 255, 0.1);
+  --line-strong: rgba(255, 255, 255, 0.2);
+  --accent: #4aa8ff;
 
-  --accent: #6e8bff;
-  --accent-2: #8b5cf6;
-  --accent-soft: #82a0ff;
-
-  --panel-bg: rgba(255, 255, 255, 0.025);
-  --panel-bg-hover: rgba(255, 255, 255, 0.05);
-  --hairline: rgba(255, 255, 255, 0.09);
-  --hairline-strong: rgba(255, 255, 255, 0.16);
-  --glass-bg: rgba(18, 18, 22, 0.65);
-  --chip-bg: rgba(255, 255, 255, 0.04);
-  --grid-rgb: 255, 255, 255;
-  --sheen: rgba(255, 255, 255, 0.07);
-  --shadow: rgba(0, 0, 0, 0.5);
+  --plate: linear-gradient(180deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.02));
+  --plate-edge: rgba(255, 255, 255, 0.22);
+  --scrim: rgba(5, 5, 6, 0.72);
+  --shadow: rgba(0, 0, 0, 0.6);
+  --glare: rgba(255, 255, 255, 0.11);
+  --aura: 0.2;
+  --band-veil: 0.55;
   color-scheme: dark;
 }
 
-/* ---- Light theme ---- */
 :root[data-theme="light"] {
-  --bg: #f6f7f9;
-  --bg-2: #eef0f3;
+  --bg: #fbfbfd;
+  --raise: #f3f3f6;
   --surface: #ffffff;
-  --surface-2: #f3f4f6;
-  --line: #e3e5ea;
-  --mist: #5b616e;
-  --fog: #3a3f4a;
-  --snow: #14161c;
+  --ink: #1d1d1f;
+  --muted: #55555b;
+  --faint: #86868b;
+  --line: rgba(0, 0, 0, 0.1);
+  --line-strong: rgba(0, 0, 0, 0.2);
+  --accent: #0068d6;
 
-  --accent: #4f6bf6;
-  --accent-2: #7c3aed;
-  --accent-soft: #4257d6;
-
-  --panel-bg: rgba(255, 255, 255, 0.7);
-  --panel-bg-hover: rgba(255, 255, 255, 0.95);
-  --hairline: rgba(15, 18, 30, 0.08);
-  --hairline-strong: rgba(15, 18, 30, 0.16);
-  --glass-bg: rgba(255, 255, 255, 0.72);
-  --chip-bg: rgba(15, 18, 30, 0.035);
-  --grid-rgb: 20, 22, 35;
-  --sheen: rgba(255, 255, 255, 0.9);
-  --shadow: rgba(20, 22, 40, 0.12);
+  --plate: linear-gradient(180deg, #ffffff, #f4f4f7);
+  --plate-edge: rgba(255, 255, 255, 1);
+  --scrim: rgba(251, 251, 253, 0.78);
+  --shadow: rgba(20, 20, 40, 0.14);
+  --glare: rgba(62, 120, 255, 0.1);
+  --aura: 0.16;
+  --band-veil: 0.82;
   color-scheme: light;
+}
+
+/* the one spectrum, used for emphasis only */
+:root {
+  --spectrum: linear-gradient(100deg, #3ea6ff 0%, #7c5cff 36%, #ff4fa3 68%, #ff9f43 100%);
 }
 
 /* ============================================================
    Base
    ============================================================ */
 html {
+  position: relative;
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
-  background-color: var(--bg);
-  color: var(--fog);
+  background: var(--bg);
+  color: var(--ink);
   font-family: var(--font-sans);
-  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11", "ss01";
   overflow-x: hidden;
-  transition: background-color 0.5s var(--ease-out-expo), color 0.5s var(--ease-out-expo);
+  overflow-x: clip;
+  transition: background-color 0.4s var(--ease-out), color 0.4s var(--ease-out);
 }
 
 ::selection {
-  background: color-mix(in srgb, var(--accent) 35%, transparent);
+  background: color-mix(in srgb, var(--accent) 40%, transparent);
   color: #fff;
 }
 
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
 ::-webkit-scrollbar {
-  width: 11px;
+  width: 10px;
 }
 ::-webkit-scrollbar-track {
   background: var(--bg);
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--line);
+  background: var(--line-strong);
   border-radius: 999px;
   border: 3px solid var(--bg);
 }
-::-webkit-scrollbar-thumb:hover {
-  background: color-mix(in srgb, var(--line) 60%, var(--mist));
-}
 
 /* ============================================================
-   Component helpers (theme-aware)
+   Type
    ============================================================ */
 @layer components {
-  .panel {
-    background: var(--panel-bg);
-    border: 1px solid var(--hairline);
-    border-radius: 1rem;
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+  .display-1 {
+    font-size: clamp(2.5rem, 5.6vw, 5.25rem);
+    line-height: 1.02;
+    letter-spacing: -0.038em;
+    font-weight: 650;
+    text-wrap: balance;
+  }
+  /* the hero statement: large, but sized to share the screen with the stage */
+  .display-hero {
+    font-size: clamp(2.35rem, 4.15vw, 3.9rem);
+    line-height: 1.04;
+    letter-spacing: -0.038em;
+    font-weight: 650;
+    text-wrap: balance;
+  }
+  .display-2 {
+    font-size: clamp(2rem, 4.1vw, 3.6rem);
+    line-height: 1.05;
+    letter-spacing: -0.034em;
+    font-weight: 650;
+    text-wrap: balance;
+  }
+  .display-3 {
+    font-size: clamp(1.5rem, 2.4vw, 2.1rem);
+    line-height: 1.15;
+    letter-spacing: -0.025em;
+    font-weight: 620;
+    text-wrap: balance;
+  }
+  .lede {
+    font-size: clamp(1.05rem, 1.35vw, 1.3rem);
+    line-height: 1.55;
+    color: var(--muted);
+    text-wrap: pretty;
+  }
+  /* small uppercase monospace label */
+  .kicker {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--faint);
   }
 
-  /* Glossy card: subtle top sheen + depth, premium feel */
+  .spectrum-text {
+    background: var(--spectrum);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: spectrum-slide 10s ease-in-out infinite alternate;
+  }
+
+  /* ============================================================
+     Surfaces and controls
+     ============================================================ */
+  .page {
+    width: 100%;
+    max-width: var(--container-page);
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+  @media (min-width: 640px) {
+    .page {
+      padding-inline: 2rem;
+    }
+  }
+  @media (min-width: 1024px) {
+    .page {
+      padding-inline: 3rem;
+    }
+  }
+
+  /* glossy plate: lit top edge, soft depth */
+  .plate {
+    position: relative;
+    background: var(--plate);
+    border: 1px solid var(--line);
+    box-shadow:
+      0 1px 0 0 var(--plate-edge) inset,
+      0 24px 48px -32px var(--shadow);
+  }
+
+  /* ---- the glossy card -------------------------------------------------
+     The same material as the 3D scene, in CSS: a lit top edge, soft depth,
+     a spectrum rim that wakes up under the cursor, and a glare that follows
+     it. GlossCard.tsx feeds --mx/--my/--rx/--ry. */
   .gloss {
     position: relative;
-    background:
-      linear-gradient(
-        180deg,
-        color-mix(in srgb, var(--sheen) 60%, transparent),
-        transparent 18%
-      ),
-      var(--panel-bg);
-    border: 1px solid var(--hairline);
+    isolation: isolate;
+    border-radius: 1.5rem;
+    background: var(--plate);
+    border: 1px solid var(--line);
     box-shadow:
-      0 1px 0 0 var(--sheen) inset,
-      0 20px 40px -24px var(--shadow);
-    transition: border-color 0.4s var(--ease-out-expo),
-      transform 0.4s var(--ease-out-expo), box-shadow 0.4s var(--ease-out-expo);
+      0 1px 0 0 var(--plate-edge) inset,
+      0 30px 60px -42px var(--shadow);
+    transform: perspective(1100px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg))
+      translateY(var(--lift, 0px));
+    transition:
+      transform 0.5s var(--ease-out),
+      box-shadow 0.5s var(--ease-out),
+      border-color 0.5s var(--ease-out);
   }
-  .gloss:hover {
-    border-color: var(--hairline-strong);
-    box-shadow:
-      0 1px 0 0 var(--sheen) inset,
-      0 30px 60px -28px var(--shadow);
+  /* spectrum rim */
+  .gloss::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    border-radius: inherit;
+    padding: 1px;
+    background: conic-gradient(
+      from var(--angle),
+      #3ea6ff,
+      #7c5cff,
+      #ff4fa3,
+      #ff9f43,
+      #3ea6ff
+    );
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.5s var(--ease-out);
+    pointer-events: none;
+  }
+  /* cursor glare */
+  .gloss::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    border-radius: inherit;
+    background: radial-gradient(
+      440px circle at var(--mx, 50%) var(--my, 0%),
+      var(--glare),
+      transparent 62%
+    );
+    opacity: 0;
+    transition: opacity 0.45s var(--ease-out);
+    pointer-events: none;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .gloss:hover {
+      --lift: -5px;
+      border-color: transparent;
+      box-shadow:
+        0 1px 0 0 var(--plate-edge) inset,
+        0 44px 80px -44px color-mix(in srgb, var(--accent) 55%, var(--shadow));
+    }
+    .gloss:hover::before {
+      opacity: 1;
+      animation: spin-angle 5s linear infinite;
+    }
+    .gloss:hover::after {
+      opacity: 1;
+    }
+  }
+  /* a rim that is always lit, for the one card per section that leads */
+  .gloss-lead::before {
+    opacity: 0.55;
+    animation: spin-angle 9s linear infinite;
   }
 
-  .glass {
-    background: var(--glass-bg);
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border: 1px solid var(--hairline);
+  /* one pass of light across a card the first time it appears: this is the
+     gloss on touch screens, where there is no cursor to make a glare */
+  .gloss-sweep {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    overflow: hidden;
+    border-radius: inherit;
+    pointer-events: none;
+  }
+  .gloss-sweep::before {
+    content: "";
+    position: absolute;
+    inset: -40% -60%;
+    background: linear-gradient(
+      105deg,
+      transparent 42%,
+      color-mix(in srgb, var(--ink) 13%, transparent) 50%,
+      transparent 58%
+    );
+    transform: translateX(-70%);
+  }
+  .reveal-in .gloss-sweep::before {
+    animation: sweep 1.5s var(--ease-out) 0.25s both;
   }
 
-  .glass-card {
-    background: var(--panel-bg);
-    border: 1px solid var(--hairline);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+  /* glossy icon tile */
+  .tile {
+    display: grid;
+    place-items: center;
+    height: 2.75rem;
+    width: 2.75rem;
+    flex-shrink: 0;
+    border-radius: 0.9rem;
+    border: 1px solid var(--line);
+    background: var(--plate);
+    box-shadow: 0 1px 0 0 var(--plate-edge) inset;
+    color: var(--ink);
   }
 
-  .chip {
-    background: var(--chip-bg);
-    border: 1px solid var(--hairline);
+  /* a slow pool of spectrum light behind a section */
+  .aura {
+    position: absolute;
+    z-index: -1;
+    border-radius: 999px;
+    background: var(--spectrum);
+    filter: blur(110px);
+    opacity: var(--aura);
+    pointer-events: none;
+    animation: drift 18s ease-in-out infinite;
   }
 
-  .btn-solid {
-    background: var(--snow);
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.2rem 0.55rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  .btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1.4rem;
+    border-radius: 999px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    transition:
+      transform 0.3s var(--ease-out),
+      box-shadow 0.4s var(--ease-out),
+      background-color 0.3s var(--ease-out),
+      border-color 0.3s var(--ease-out);
+  }
+  .btn:active {
+    transform: scale(0.98);
+  }
+  .btn-primary {
+    background: var(--ink);
     color: var(--bg);
+    box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.35) inset;
+  }
+  /* the spectrum appears as a glow under the primary action */
+  .btn-primary::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    z-index: -1;
+    border-radius: inherit;
+    background: var(--spectrum);
+    filter: blur(14px);
+    opacity: 0;
+    transition: opacity 0.4s var(--ease-out);
+  }
+  @media (hover: hover) {
+    .btn-primary:hover::before {
+      opacity: 0.75;
+    }
+  }
+  .btn-ghost {
+    border: 1px solid var(--line-strong);
+    color: var(--ink);
+  }
+  @media (hover: hover) {
+    .btn-ghost:hover {
+      border-color: var(--ink);
+    }
   }
 
-  .btn-outline {
-    border: 1px solid var(--hairline-strong);
-    color: var(--snow);
-    background: transparent;
-    transition: all 0.3s var(--ease-out-expo);
+  .field {
+    width: 100%;
+    border: 1px solid var(--line);
+    border-radius: 0.875rem;
+    background: color-mix(in srgb, var(--ink) 4%, transparent);
+    padding: 0.8rem 1rem;
+    font-size: 0.9rem;
+    color: var(--ink);
+    outline: none;
+    transition: border-color 0.3s var(--ease-out), background-color 0.3s var(--ease-out);
   }
-  .btn-outline:hover {
-    border-color: color-mix(in srgb, var(--accent) 60%, transparent);
-    background: color-mix(in srgb, var(--accent) 10%, transparent);
+  .field::placeholder {
+    color: var(--faint);
   }
-}
-
-/* ============================================================
-   Utilities
-   ============================================================ */
-@layer utilities {
-  .text-gradient {
-    background: linear-gradient(
-      120deg,
-      var(--snow) 0%,
-      var(--accent-soft) 55%,
-      var(--accent-2) 100%
-    );
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
+  .field:focus {
+    border-color: var(--accent);
+    background: color-mix(in srgb, var(--ink) 7%, transparent);
   }
 
-  .text-gradient-anim {
-    background: linear-gradient(
-      110deg,
-      var(--snow) 0%,
-      var(--accent-soft) 38%,
-      var(--accent-2) 52%,
-      var(--accent-soft) 66%,
-      var(--snow) 100%
-    );
-    background-size: 220% auto;
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: sheen 7s linear infinite;
+  /* underline that draws in on hover */
+  .link {
+    background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat;
+    transition: background-size 0.4s var(--ease-out), color 0.3s var(--ease-out);
   }
-
-  .border-line {
-    border-color: var(--hairline);
-  }
-
-  .mask-fade-x {
-    -webkit-mask-image: linear-gradient(
-      to right,
-      transparent,
-      #000 8%,
-      #000 92%,
-      transparent
-    );
-    mask-image: linear-gradient(
-      to right,
-      transparent,
-      #000 8%,
-      #000 92%,
-      transparent
-    );
+  @media (hover: hover) {
+    .link:hover {
+      background-size: 100% 1px;
+    }
   }
 }
 
 /* ============================================================
    Motion
    ============================================================ */
+@keyframes spectrum-slide {
+  to {
+    background-position: 100% center;
+  }
+}
+
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+@keyframes spin-angle {
+  to {
+    --angle: 360deg;
+  }
+}
+@keyframes sweep {
+  to {
+    transform: translateX(70%);
+  }
+}
+@keyframes drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(6%, -5%, 0) scale(1.12);
+  }
+}
+.fade-x {
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
+}
+
+/* A 3D stage that floats on the page (not the pinned tour) lets its picture
+   run out softly at the frame, so a ground shadow never ends in a straight
+   line. */
+.stage-soft {
+  -webkit-mask-image:
+    linear-gradient(to right, transparent, #000 7%, #000 93%, transparent),
+    linear-gradient(to bottom, transparent, #000 5%, #000 94%, transparent);
+  -webkit-mask-composite: source-in;
+  mask-image:
+    linear-gradient(to right, transparent, #000 7%, #000 93%, transparent),
+    linear-gradient(to bottom, transparent, #000 5%, #000 94%, transparent);
+  mask-composite: intersect;
+}
+
+/* a card that turns over (Shipped.tsx) */
+.flip {
+  transform-style: preserve-3d;
+  transition: transform 0.9s var(--ease-out);
+}
+.flip.is-flipped {
+  transform: rotateY(180deg);
+}
+.flip-face {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+/* inside a flip the card leans in the flip's own perspective, so the faces
+   drop the perspective() of a standalone .gloss */
+.flip-face.gloss {
+  transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translateY(var(--lift, 0px));
+}
+.flip-back.gloss {
+  transform: rotateY(180deg) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg))
+    translateY(var(--lift, 0px));
+}
+
+/* tool rings (Toolkit.tsx): two cylinders turning opposite ways */
+@keyframes ring-turn {
+  to {
+    transform: rotateY(-360deg);
+  }
+}
+.ring-spin {
+  animation: ring-turn var(--ring-time, 120s) linear infinite;
+}
+.ring-reverse {
+  animation-direction: reverse;
+}
+.rings[data-held] .ring-spin {
+  animation-play-state: paused;
+}
+/* a cursor resting on the rings holds them still to be read; a finger that
+   tapped them should not, since :hover sticks on touch screens */
+@media (hover: hover) {
+  .rings:hover .ring-spin {
+    animation-play-state: paused;
+  }
+}
+
+/* before -> after ledger: the old value is struck through as it appears */
+.strike {
+  background: linear-gradient(currentColor, currentColor) 0 55% / 0 1.5px no-repeat;
+  transition: background-size 0.9s var(--ease-out) 0.35s;
+}
+.reveal-in .strike {
+  background-size: 100% 1.5px;
+}
+.rise-late {
+  opacity: 0;
+  transform: translateX(-10px);
+  transition:
+    opacity 0.8s var(--ease-out) 0.7s,
+    transform 0.8s var(--ease-out) 0.7s;
+}
+.reveal-in .rise-late {
+  opacity: 1;
+  transform: none;
+}
+
+/* scroll reveal: rise and settle; ends with no transform at all */
+.reveal {
+  opacity: 0;
+  transform: translateY(var(--reveal-y, 24px));
+  transition:
+    opacity 0.9s var(--ease-out),
+    transform 0.9s var(--ease-out);
+}
+.reveal-in {
+  opacity: 1;
+  transform: none;
+}
+
+@keyframes softping {
+  0% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  75%,
+  100% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -258,60 +590,3 @@ body {
     scroll-behavior: auto !important;
   }
 }
-
-@keyframes marquee {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-.animate-marquee {
-  animation: marquee 40s linear infinite;
-}
-
-@keyframes drift {
-  0%,
-  100% {
-    transform: translate3d(0, 0, 0) scale(1);
-  }
-  50% {
-    transform: translate3d(4%, -3%, 0) scale(1.08);
-  }
-}
-.animate-drift {
-  animation: drift 20s ease-in-out infinite;
-}
-
-/* Animated gradient sheen sweeping across the hero headline */
-@keyframes sheen {
-  to {
-    background-position: 200% center;
-  }
-}
-
-/* Floating particles (ambient motion) */
-@keyframes floaty {
-  0%,
-  100% {
-    transform: translateY(0) translateX(0);
-  }
-  50% {
-    transform: translateY(var(--drift, -20px)) translateX(6px);
-  }
-}
-
-/* Soft pulse for the live availability dot */
-@keyframes softping {
-  0% {
-    transform: scale(1);
-    opacity: 0.7;
-  }
-  75%,
-  100% {
-    transform: scale(2.2);
-    opacity: 0;
-  }
-}
-

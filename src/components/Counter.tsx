@@ -1,81 +1,70 @@
 import { useEffect, useRef, useState } from "react";
 
 function parse(value: string) {
-  const m = value.match(/^(\D*)([\d.]+)(.*)$/);
-  if (!m) return { prefix: "", num: 0, suffix: value, decimals: 0 };
-  const decimals = m[2].includes(".") ? m[2].split(".")[1].length : 0;
-  return { prefix: m[1], num: parseFloat(m[2]), suffix: m[3], decimals };
+  const m = value.match(/^([~$<>]?)([\d.,]+)(.*)$/);
+  if (!m) return null;
+  const digits = m[2].replace(/,/g, "");
+  const decimals = digits.includes(".") ? digits.split(".")[1].length : 0;
+  return {
+    prefix: m[1],
+    num: parseFloat(digits),
+    suffix: m[3],
+    decimals,
+    grouped: m[2].includes(","),
+  };
 }
 
-/**
- * Counts up to a numeric value when scrolled into view.
- * Uses a plain IntersectionObserver (reliable on mobile), honors
- * reduced-motion, and always resolves to the real value as a safety net.
- */
+/** Counts up to a figure the first time it scrolls into view. Anything that
+ *  is not a number ("React 19" is, "Docs" is not) is shown as written. Honors
+ *  reduced motion, and always lands on the exact value. */
 export default function Counter({ value }: { value: string }) {
   const ref = useRef<HTMLSpanElement>(null);
-  const { prefix, num, suffix, decimals } = parse(value);
+  const parsed = parse(value);
   const [n, setN] = useState(0);
+  const [done, setDone] = useState(false);
 
   useEffect(() => {
     const el = ref.current;
-    if (!el) {
-      setN(num);
+    if (!el || !parsed) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setDone(true);
       return;
     }
-
     let raf = 0;
-    let started = false;
-    const reduce =
-      typeof window !== "undefined" &&
-      window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
-
-    const run = () => {
-      if (started) return;
-      started = true;
-      if (reduce) {
-        setN(num);
-        return;
-      }
-      const start = performance.now();
-      const duration = 1300;
-      const tick = (t: number) => {
-        const p = Math.min((t - start) / duration, 1);
-        const eased = 1 - Math.pow(1 - p, 3);
-        setN(num * eased);
-        if (p < 1) raf = requestAnimationFrame(tick);
-        else setN(num);
-      };
-      raf = requestAnimationFrame(tick);
-    };
-
     const io = new IntersectionObserver(
-      (entries) => {
-        if (entries.some((e) => e.isIntersecting)) {
-          run();
-          io.disconnect();
-        }
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        io.disconnect();
+        const start = performance.now();
+        const tick = (t: number) => {
+          const p = Math.min((t - start) / 1400, 1);
+          setN(parsed.num * (1 - Math.pow(1 - p, 4)));
+          if (p < 1) raf = requestAnimationFrame(tick);
+          else setDone(true);
+        };
+        raf = requestAnimationFrame(tick);
       },
-      { threshold: 0.25 },
+      { threshold: 0.4 },
     );
     io.observe(el);
-
-    // Safety net: if the observer never fires for any reason, still show the
-    // real number after a short delay so it never sticks at 0.
-    const fallback = window.setTimeout(run, 2500);
-
     return () => {
       io.disconnect();
       cancelAnimationFrame(raf);
-      clearTimeout(fallback);
     };
-  }, [num]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [value]);
+
+  if (!parsed) return <span>{value}</span>;
+  const shownValue = done ? parsed.num : n;
+  const text = parsed.grouped
+    ? Math.round(shownValue).toLocaleString("en-US")
+    : shownValue.toFixed(parsed.decimals);
 
   return (
-    <span ref={ref}>
-      {prefix}
-      {n.toFixed(decimals)}
-      {suffix}
+    <span ref={ref} className="tabular-nums">
+      {parsed.prefix}
+      {text}
+      {parsed.suffix}
     </span>
   );
 }

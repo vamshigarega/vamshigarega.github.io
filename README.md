@@ -1,4 +1,4 @@
-# Vamshi Krishna Garega - Portfolio
+# Vamshi Krishna Garega: Portfolio
 
 Personal portfolio of **Vamshi Krishna Garega**, an AI Engineer building LLM
 agents, MCP servers, and large-scale data systems. Currently a Software Engineer
@@ -10,11 +10,20 @@ Live: <https://vamshigarega.github.io>
 
 - [Vite](https://vitejs.dev/) + [React 19](https://react.dev/) + TypeScript
 - [Tailwind CSS v4](https://tailwindcss.com/)
-- [Motion](https://motion.dev/) for animation
+- [three.js](https://threejs.org/) for the 3D platform tour
 - [lucide-react](https://lucide.dev/) icons
+- Self-hosted variable fonts (Inter, JetBrains Mono)
 
-The design language is "Apple-grade Noir": a near-black canvas, glassmorphism,
-restrained motion, and a single cool accent.
+The page opens with a scroll-driven 3D tour of the platform described in the
+copy: teams, AI agents, the MCP gateway, MCP servers, and the data fleet. The
+model can be dragged, hovered, and clicked. Each later section has its own 3D
+picture: stacks that build from 1 agent to 9 in the before-and-after section,
+case cards that turn over to show how each piece of work operates, a ring of
+tool marks, and a paper plane that takes off when the contact form is sent.
+
+The 3D engine loads after first paint and starts up in small steps so it never
+drops a frame, footage loads only when scrolled into view, images ship as AVIF
+with JPEG fallbacks, and motion respects reduced-motion settings.
 
 ## Develop
 
@@ -34,7 +43,7 @@ npm run preview  # preview the production build
 
 Pushing to `main` triggers `.github/workflows/deploy.yml`, which builds the site
 and publishes it to GitHub Pages. The repository's Pages source must be set to
-**GitHub Actions** (Settings -> Pages).
+**GitHub Actions** (Settings, then Pages).
 
 ## Editing content
 

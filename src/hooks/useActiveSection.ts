@@ -1,15 +1,21 @@
 import { useEffect, useState } from "react";
 
-/** Tracks which section is currently centered in the viewport (scrollspy). */
+/** Scrollspy: the section that currently crosses the middle of the viewport.
+ *  Returns "" when none of the given sections is there (for example while the
+ *  hero is on screen), so no nav item lights up. */
 export function useActiveSection(ids: string[]) {
-  const [active, setActive] = useState(ids[0] ?? "");
+  const [active, setActive] = useState("");
 
   useEffect(() => {
+    const visible = new Set<string>();
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) setActive(entry.target.id);
+          if (entry.isIntersecting) visible.add(entry.target.id);
+          else visible.delete(entry.target.id);
         });
+        // sections do not overlap, so at most one is on the midline
+        setActive(ids.find((id) => visible.has(id)) ?? "");
       },
       { rootMargin: "-45% 0px -50% 0px", threshold: 0 },
     );
