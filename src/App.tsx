@@ -1,31 +1,35 @@
 import { ThemeProvider } from "./theme/ThemeContext";
-import Background from "./components/Background";
-import ScrollProgress from "./components/ScrollProgress";
-import Navbar from "./components/Navbar";
-import Hero from "./components/Hero";
-import Marquee from "./components/Marquee";
+import TopBar from "./components/TopBar";
+import Tour from "./components/Tour";
+import Shift from "./components/Shift";
+import Shipped from "./components/Shipped";
 import About from "./components/About";
-import Capabilities from "./components/Capabilities";
 import Experience from "./components/Experience";
-import Skills from "./components/Skills";
-import Projects from "./components/Projects";
+import Principles from "./components/Principles";
+import Toolkit from "./components/Toolkit";
 import Research from "./components/Research";
+import Projects from "./components/Projects";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 
 export default function App() {
   return (
     <ThemeProvider>
-      <Background />
-      <ScrollProgress />
-      <Navbar />
-      <main>
-        <Hero />
-        <Marquee />
+      <a
+        href="#main"
+        className="btn btn-primary fixed left-4 top-4 z-[70] -translate-y-24 focus-visible:translate-y-0"
+      >
+        Skip to content
+      </a>
+      <TopBar />
+      <main id="main">
+        <Tour />
+        <Shift />
+        <Shipped />
         <About />
-        <Capabilities />
         <Experience />
-        <Skills />
+        <Principles />
+        <Toolkit />
         <Research />
         <Projects />
         <Contact />

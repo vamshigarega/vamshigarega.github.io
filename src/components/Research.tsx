@@ -1,125 +1,107 @@
-import {
-  ExternalLink,
-  FileText,
-  Award,
-  GraduationCap,
-  Trophy,
-  Medal,
-  Star,
-  Sparkles,
-  type LucideIcon,
-} from "lucide-react";
-import Section from "./Section";
-import Reveal from "./Reveal";
-import Tilt from "./Tilt";
-import { publication, honors, education } from "../data/content";
+import { ArrowUpRight, Award, GraduationCap, ScrollText } from "lucide-react";
+import SectionHead from "./SectionHead";
+import GlossCard from "./GlossCard";
+import { education, honors, publication } from "../data/content";
 
-const honorIcons: LucideIcon[] = [Trophy, Star, Medal, Award];
-
+/** The paper leads at full width (what it is on the left, what it says on
+ *  the right); education and honors share the row beneath, sized so both
+ *  cards end on the same line. */
 export default function Research() {
   return (
-    <Section
-      id="research"
-      eyebrow="Research & Recognition"
-      title="Publication, education, and honors."
-    >
-      <div className="space-y-6">
-        {/* featured publication - full width */}
-        <Reveal>
-          <Tilt max={3}>
-            <div className="relative overflow-hidden rounded-2xl border border-accent/30 bg-gradient-to-br from-accent/[0.1] to-transparent p-7 sm:p-8">
-              <div className="pointer-events-none absolute -right-20 -top-20 h-56 w-56 rounded-full bg-accent/20 blur-3xl" />
-              <div className="relative grid gap-6 lg:grid-cols-[1fr_1.1fr] lg:gap-10">
-                {/* left: meta */}
-                <div>
-                  <div className="mb-4 inline-flex w-fit items-center gap-2 rounded-full border border-accent/40 bg-accent/15 px-3 py-1 font-mono text-xs text-accent-soft">
-                    <FileText size={13} /> Peer-reviewed publication
-                  </div>
-                  <h3 className="text-2xl font-semibold leading-snug text-snow">
-                    {publication.title}
-                  </h3>
-                  <p className="mt-2 font-mono text-xs text-mist">
-                    {publication.venue} &middot; {publication.date}
-                  </p>
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    {publication.tags.map((t) => (
-                      <span
-                        key={t}
-                        className="rounded-md border border-accent/25 bg-accent/10 px-2 py-0.5 font-mono text-[11px] text-accent-soft"
-                      >
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-                  <a
-                    href={publication.doi}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="btn-solid mt-6 inline-flex w-fit items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition-all hover:gap-3"
-                  >
-                    View publication <ExternalLink size={14} />
-                  </a>
+    <section id="research" className="relative isolate scroll-mt-14 overflow-x-clip">
+      <span aria-hidden className="aura -right-44 top-40 h-[26rem] w-[26rem]" />
+
+      <div className="page py-16 sm:py-20 lg:py-28">
+        <SectionHead kicker="Research and education" title="Published, funded, and recognized." />
+
+        <div className="mt-10 grid gap-5 lg:mt-14 lg:grid-cols-12">
+          {/* publication */}
+          <GlossCard
+            as="article"
+            lead
+            tilt={2}
+            wrapClassName="lg:col-span-12"
+            className="p-7 sm:p-10"
+          >
+            <div className="grid gap-x-12 gap-y-7 lg:grid-cols-[0.9fr_1.1fr]">
+              <div>
+                <div className="flex items-center gap-4">
+                  <span className="tile">
+                    <ScrollText size={19} />
+                  </span>
+                  <p className="kicker">Peer-reviewed publication</p>
                 </div>
-                {/* right: abstract */}
-                <p className="text-sm leading-relaxed text-mist lg:border-l lg:border-line lg:pl-10">
-                  {publication.abstract}
+                <h3 className="display-3 mt-7">{publication.title}</h3>
+                <p className="mt-3 font-mono text-xs text-muted">
+                  {publication.venue} / {publication.date}
                 </p>
+                <div className="mt-6 flex flex-wrap gap-2">
+                  {publication.tags.map((t) => (
+                    <span key={t} className="tag">
+                      {t}
+                    </span>
+                  ))}
+                </div>
+                <a
+                  href={publication.doi}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="btn btn-primary relative z-[3] mt-8"
+                >
+                  Read the paper <ArrowUpRight size={16} />
+                </a>
+              </div>
+              <div className="lg:border-l lg:border-line lg:pl-12">
+                <p className="kicker">Abstract</p>
+                <p className="mt-4 text-[15px] leading-relaxed text-muted">{publication.abstract}</p>
               </div>
             </div>
-          </Tilt>
-        </Reveal>
+          </GlossCard>
 
-        {/* education + honors, equal columns */}
-        <div className="grid items-stretch gap-6 md:grid-cols-2">
-          <Reveal delay={0.05} className="h-full">
-            <div className="gloss h-full rounded-2xl p-7">
-              <h3 className="mb-5 flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-snow">
-                <GraduationCap size={16} className="text-accent" /> Education
-              </h3>
-              <div className="space-y-5">
-                {education.map((e) => (
-                  <div key={e.degree} className="border-l-2 border-accent/40 pl-4">
-                    <p className="font-medium text-fog">{e.degree}</p>
-                    <p className="text-sm text-mist">{e.school}</p>
-                    <p className="mt-0.5 font-mono text-xs text-mist">
-                      {e.detail} &middot; {e.period}
-                    </p>
-                  </div>
-                ))}
-              </div>
+          {/* education */}
+          <GlossCard wrapClassName="lg:col-span-5" delay={0.06} className="p-7 sm:p-8">
+            <div className="flex items-center gap-4">
+              <span className="tile">
+                <GraduationCap size={19} />
+              </span>
+              <p className="kicker">Education</p>
             </div>
-          </Reveal>
+            <ul className="mt-5">
+              {education.map((e) => (
+                <li key={e.degree} className="border-t border-line py-4 first:border-t-0">
+                  <p className="font-semibold leading-snug tracking-tight">{e.degree}</p>
+                  <p className="mt-1.5 text-sm text-muted">{e.school}</p>
+                  <p className="mt-1.5 font-mono text-xs text-faint">
+                    {e.detail} / {e.period}
+                  </p>
+                </li>
+              ))}
+            </ul>
+          </GlossCard>
 
-          <Reveal delay={0.1} className="h-full">
-            <div className="gloss h-full rounded-2xl p-7">
-              <h3 className="mb-5 flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-snow">
-                <Sparkles size={15} className="text-accent" /> Honors &amp; Awards
-              </h3>
-              <ul className="space-y-2.5">
-                {honors.map((h, i) => {
-                  const Icon = honorIcons[i % honorIcons.length];
-                  return (
-                    <li
-                      key={h.title}
-                      className="group flex items-start gap-3 rounded-xl border border-transparent p-2 transition-colors hover:border-line hover:bg-[color:var(--chip-bg)]"
-                    >
-                      <span className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-accent/30 bg-accent/10 text-accent-soft transition-transform group-hover:scale-110">
-                        <Icon size={15} />
-                      </span>
-                      <div>
-                        <p className="text-sm font-medium text-fog">{h.title}</p>
-                        <p className="text-xs text-mist">
-                          {h.note} &middot; {h.year}
-                        </p>
-                      </div>
-                    </li>
-                  );
-                })}
-              </ul>
+          {/* honors, two by two so the card matches education in height */}
+          <GlossCard wrapClassName="lg:col-span-7" delay={0.12} className="p-7 sm:p-8">
+            <div className="flex items-center gap-4">
+              <span className="tile">
+                <Award size={19} />
+              </span>
+              <p className="kicker">Honors</p>
             </div>
-          </Reveal>
+            <ul className="mt-5 grid gap-x-8 sm:grid-cols-2">
+              {honors.map((h) => (
+                <li
+                  key={h.title}
+                  className="border-t border-line py-4 first:border-t-0 sm:[&:nth-child(2)]:border-t-0"
+                >
+                  <p className="font-semibold leading-snug tracking-tight">{h.title}</p>
+                  <p className="mt-1.5 text-sm text-muted">{h.note}</p>
+                  <p className="mt-1.5 font-mono text-xs text-faint">{h.year}</p>
+                </li>
+              ))}
+            </ul>
+          </GlossCard>
         </div>
       </div>
-    </Section>
+    </section>
   );
 }

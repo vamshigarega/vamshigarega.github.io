@@ -4,7 +4,7 @@ import { contact, profile } from "../data/content";
 
 type Status = "idle" | "sending" | "success" | "error";
 
-export default function ContactForm() {
+export default function ContactForm({ onSent }: { onSent?: () => void }) {
   const [status, setStatus] = useState<Status>("idle");
   const [form, setForm] = useState({ name: "", email: "", message: "" });
 
@@ -44,6 +44,7 @@ export default function ContactForm() {
       if (res.ok && (data.success === "true" || data.success === true)) {
         setStatus("success");
         setForm({ name: "", email: "", message: "" });
+        onSent?.();
       } else {
         setStatus("error");
       }
@@ -53,17 +54,13 @@ export default function ContactForm() {
     }
   }
 
-  const inputClass =
-    "w-full rounded-xl border border-line bg-[color:var(--chip-bg)] px-4 py-3 text-sm text-snow placeholder:text-mist outline-none transition-colors focus:border-accent/60 focus:bg-[color:var(--panel-bg-hover)]";
+  const label = "mb-2 block font-mono text-[0.7rem] uppercase tracking-[0.16em] text-faint";
 
   return (
-    <form
-      onSubmit={onSubmit}
-      className="gloss flex h-full flex-col gap-4 rounded-2xl p-6 sm:p-7"
-    >
-      <div className="grid gap-4 sm:grid-cols-2">
+    <form onSubmit={onSubmit} className="flex flex-col gap-5">
+      <div className="grid gap-5 sm:grid-cols-2">
         <div>
-          <label htmlFor="cf-name" className="mb-1.5 block text-xs font-medium text-mist">
+          <label htmlFor="cf-name" className={label}>
             Name
           </label>
           <input
@@ -74,11 +71,11 @@ export default function ContactForm() {
             value={form.name}
             onChange={update("name")}
             placeholder="Your name"
-            className={inputClass}
+            className="field"
           />
         </div>
         <div>
-          <label htmlFor="cf-email" className="mb-1.5 block text-xs font-medium text-mist">
+          <label htmlFor="cf-email" className={label}>
             Email
           </label>
           <input
@@ -89,31 +86,27 @@ export default function ContactForm() {
             value={form.email}
             onChange={update("email")}
             placeholder="you@example.com"
-            className={inputClass}
+            className="field"
           />
         </div>
       </div>
 
-      <div className="flex flex-1 flex-col">
-        <label htmlFor="cf-message" className="mb-1.5 block text-xs font-medium text-mist">
+      <div>
+        <label htmlFor="cf-message" className={label}>
           Message
         </label>
         <textarea
           id="cf-message"
           required
-          rows={5}
+          rows={6}
           value={form.message}
           onChange={update("message")}
-          placeholder="Tell me about the role, project, or just say hello."
-          className={`${inputClass} min-h-[120px] flex-1 resize-none`}
+          placeholder="Tell me about the role, the team, or the problem."
+          className="field resize-none"
         />
       </div>
 
-      <button
-        type="submit"
-        disabled={status === "sending"}
-        className="btn-solid group inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-all hover:opacity-90 disabled:opacity-60"
-      >
+      <button type="submit" disabled={status === "sending"} className="btn btn-primary disabled:opacity-60">
         {status === "sending" ? (
           <>
             <Loader2 size={16} className="animate-spin" /> Sending...
@@ -125,24 +118,23 @@ export default function ContactForm() {
         )}
       </button>
 
-      {status === "success" && (
-        <p className="flex items-center gap-2 text-sm text-emerald-400">
-          <CheckCircle2 size={16} /> Thanks. Your message is on its way to my inbox.
-        </p>
-      )}
-      {status === "error" && (
-        <div className="flex flex-col gap-2 text-sm">
-          <p className="flex items-center gap-2 text-amber-400">
-            <AlertCircle size={16} /> Direct send is unavailable right now.
+      <div aria-live="polite">
+        {status === "success" && (
+          <p className="flex items-center gap-2 text-sm text-emerald-500">
+            <CheckCircle2 size={16} /> Thanks. Your message is on its way to my inbox.
           </p>
-          <a
-            href={mailtoHref}
-            className="font-medium text-accent-soft underline-offset-2 hover:underline"
-          >
-            Tap here to send it from your email app instead.
-          </a>
-        </div>
-      )}
+        )}
+        {status === "error" && (
+          <div className="flex flex-col gap-2 text-sm">
+            <p className="flex items-center gap-2 text-amber-500">
+              <AlertCircle size={16} /> Direct send is unavailable right now.
+            </p>
+            <a href={mailtoHref} className="link w-fit font-medium text-accent">
+              Send it from your email app instead.
+            </a>
+          </div>
+        )}
+      </div>
     </form>
   );
 }

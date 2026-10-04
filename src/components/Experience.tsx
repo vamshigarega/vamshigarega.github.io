@@ -1,96 +1,112 @@
-import { useState } from "react";
-import { AnimatePresence, motion } from "motion/react";
-import { MapPin, CalendarDays } from "lucide-react";
-import Section from "./Section";
+import { useEffect, useRef } from "react";
+import SectionHead from "./SectionHead";
+import GlossCard from "./GlossCard";
 import Reveal from "./Reveal";
 import { experience } from "../data/content";
 
+/** A timeline you scroll through: a line of spectrum light runs down the
+ *  rail as you read, and each role's marker lights as the line reaches it.
+ *  Every role is open; nothing hides behind a click. */
 export default function Experience() {
-  const [active, setActive] = useState(0);
-  const job = experience[active];
+  const list = useRef<HTMLDivElement>(null);
+  const fill = useRef<HTMLSpanElement>(null);
+  const nodes = useRef<(HTMLSpanElement | null)[]>([]);
+
+  useEffect(() => {
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      const el = list.current;
+      if (!el) return;
+      const r = el.getBoundingClientRect();
+      const eye = window.innerHeight * 0.62;
+      const p = Math.min(Math.max((eye - r.top) / r.height, 0), 1);
+      if (fill.current) fill.current.style.transform = `scaleY(${p.toFixed(4)})`;
+      for (const node of nodes.current) {
+        if (!node) continue;
+        node.toggleAttribute("data-lit", node.getBoundingClientRect().top < eye);
+      }
+    };
+    const queue = () => {
+      if (!frame) frame = requestAnimationFrame(update);
+    };
+    update();
+    window.addEventListener("scroll", queue, { passive: true });
+    window.addEventListener("resize", queue);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", queue);
+      window.removeEventListener("resize", queue);
+    };
+  }, []);
 
   return (
-    <Section id="experience" eyebrow="Experience" title="Where I have shipped.">
-      <Reveal>
-        <div className="grid gap-8 lg:grid-cols-[260px_1fr]">
-          {/* company tabs */}
-          <div
-            role="tablist"
-            aria-label="Companies"
-            className="flex gap-2 overflow-x-auto pb-2 lg:flex-col lg:gap-1 lg:overflow-visible lg:pb-0"
-          >
-            {experience.map((e, i) => {
-              const isActive = i === active;
-              return (
-                <button
-                  key={e.company}
-                  role="tab"
-                  aria-selected={isActive}
-                  onClick={() => setActive(i)}
-                  className={`relative shrink-0 rounded-xl px-4 py-3 text-left text-sm transition-colors lg:shrink ${
-                    isActive
-                      ? "text-snow"
-                      : "text-mist hover:bg-[color:var(--chip-bg)] hover:text-fog"
-                  }`}
-                >
-                  {isActive && (
-                    <motion.span
-                      layoutId="exp-active"
-                      className="absolute inset-0 -z-10 rounded-xl border border-line bg-[color:var(--panel-bg)]"
-                      transition={{ type: "spring", stiffness: 400, damping: 32 }}
-                    />
-                  )}
-                  <span className="block font-semibold">{e.company}</span>
-                  <span className="block text-xs text-mist">{e.role}</span>
-                </button>
-              );
-            })}
-          </div>
+    <section id="experience" className="relative isolate scroll-mt-14 overflow-x-clip">
+      <span aria-hidden className="aura -right-56 top-1/3 h-[28rem] w-[28rem]" />
 
-          {/* details panel */}
-          <div className="gloss min-h-[20rem] rounded-2xl p-6 sm:p-8">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={active}
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -8 }}
-                transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+      <div className="page py-16 sm:py-20 lg:py-28">
+        <SectionHead kicker="Experience" title="Where I have shipped." />
+
+        <div ref={list} className="relative mt-10 lg:mt-14">
+          {/* the rail, and the light that travels it */}
+          <span
+            aria-hidden
+            className="absolute bottom-3 left-[15rem] top-3 hidden w-px bg-line lg:block"
+          />
+          <span
+            ref={fill}
+            aria-hidden
+            className="absolute bottom-3 left-[calc(15rem-1px)] top-3 hidden w-[3px] origin-top scale-y-0 rounded-full bg-[linear-gradient(180deg,#3ea6ff,#7c5cff,#ff4fa3,#ff9f43)] lg:block"
+          />
+
+          <ol className="space-y-10">
+            {experience.map((job, i) => (
+              <li
+                key={job.company}
+                className="relative grid gap-y-4 lg:grid-cols-[13rem_1fr] lg:gap-x-16"
               >
-                <h3 className="text-xl font-semibold text-snow">
-                  {job.role}
-                  <span className="text-accent"> @ {job.company}</span>
-                </h3>
-                <div className="mt-2 flex flex-wrap items-center gap-x-5 gap-y-1 text-sm text-mist">
-                  <span className="inline-flex items-center gap-1.5">
-                    <CalendarDays size={14} className="text-accent" />
-                    {job.period}
-                  </span>
-                  <span className="inline-flex items-center gap-1.5">
-                    <MapPin size={14} className="text-accent" />
-                    {job.location}
-                  </span>
-                </div>
+                <span
+                  ref={(el) => {
+                    nodes.current[i] = el;
+                  }}
+                  aria-hidden
+                  className="absolute left-[calc(15rem-7px)] top-2 hidden h-[15px] w-[15px] rounded-full border-2 border-line-strong bg-bg transition-all duration-500 data-[lit]:border-transparent data-[lit]:bg-[image:var(--spectrum)] data-[lit]:shadow-[0_0_18px_var(--accent)] lg:block"
+                />
 
-                <ul className="mt-6 space-y-3.5">
-                  {job.points.map((pt, j) => (
-                    <motion.li
-                      key={j}
-                      initial={{ opacity: 0, x: -8 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.08 + j * 0.06, duration: 0.4 }}
-                      className="flex gap-3 text-sm leading-relaxed text-fog"
-                    >
-                      <span className="mt-2 h-1.5 w-1.5 shrink-0 rotate-45 bg-accent/80" />
-                      <span>{pt}</span>
-                    </motion.li>
-                  ))}
-                </ul>
-              </motion.div>
-            </AnimatePresence>
-          </div>
+                <Reveal className="flex flex-wrap items-center gap-x-4 gap-y-2 lg:sticky lg:top-24 lg:block lg:self-start lg:pt-1 lg:text-right">
+                  <p className="font-mono text-xs text-ink">{job.period}</p>
+                  <p className="text-sm text-faint lg:mt-1">{job.location}</p>
+                  {job.current && (
+                    <p className="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 px-2.5 py-1 text-xs font-medium text-emerald-500 lg:mt-3">
+                      <span className="relative flex h-1.5 w-1.5">
+                        <span className="absolute h-full w-full animate-[softping_2s_ease-out_infinite] rounded-full bg-emerald-400" />
+                        <span className="relative h-1.5 w-1.5 rounded-full bg-emerald-400" />
+                      </span>
+                      Current
+                    </p>
+                  )}
+                </Reveal>
+
+                <GlossCard as="article" lead={job.current} tilt={2} className="p-7 sm:p-9">
+                  <h3 className="display-3">
+                    {job.company}
+                    <span className="text-faint"> / {job.role}</span>
+                  </h3>
+                  <p className="mt-2 text-[15px] text-muted">{job.summary}</p>
+                  <ul className="mt-6 space-y-3.5">
+                    {job.points.map((pt) => (
+                      <li key={pt} className="flex gap-3.5 text-[15px] leading-relaxed text-muted">
+                        <span className="mt-[0.55rem] h-1.5 w-1.5 shrink-0 rounded-full bg-[image:var(--spectrum)]" />
+                        <span>{pt}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </GlossCard>
+              </li>
+            ))}
+          </ol>
         </div>
-      </Reveal>
-    </Section>
+      </div>
+    </section>
   );
 }

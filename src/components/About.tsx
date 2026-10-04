@@ -1,62 +1,79 @@
-import Section from "./Section";
+import { BookOpen, Briefcase, GraduationCap, MapPin, type LucideIcon } from "lucide-react";
 import Reveal from "./Reveal";
-import Counter from "./Counter";
-import { about, stats, profile } from "../data/content";
-import profileImg from "../assets/img/profile.jpg";
+import GlossCard from "./GlossCard";
+import Picture from "./Picture";
+import { about, profile } from "../data/content";
+import portrait from "../assets/img/profile.jpg";
+import portraitAvif from "../assets/img/profile.avif";
+
+// one icon per fact, in about.facts order
+const factIcons: LucideIcon[] = [Briefcase, MapPin, GraduationCap, BookOpen];
 
 export default function About() {
   return (
-    <Section id="about" eyebrow="About" title="Engineer at the intersection of AI and data.">
-      <div className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr]">
-        {/* portrait */}
-        <Reveal>
-          <div className="group relative mx-auto max-w-sm">
-            <div className="absolute -inset-px rounded-3xl bg-gradient-to-br from-accent/40 via-transparent to-accent-2/40 opacity-60 blur-sm transition-opacity group-hover:opacity-100" />
-            <div className="relative overflow-hidden rounded-3xl border border-line">
-              <img
-                src={profileImg}
-                alt={profile.name}
-                className="aspect-[4/5] w-full object-cover transition-transform duration-700 group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-transparent to-transparent" />
-              <div className="absolute bottom-4 left-4 right-4 glass-card rounded-xl px-4 py-3">
-                <p className="text-sm font-semibold text-snow">{profile.name}</p>
-                <p className="text-xs text-mist">
-                  {profile.role} at {profile.company}
-                </p>
-              </div>
-            </div>
-          </div>
-        </Reveal>
+    <section className="relative isolate overflow-x-clip">
+      <span aria-hidden className="aura -left-48 top-32 h-[26rem] w-[26rem]" />
 
-        {/* copy + stats */}
-        <div>
-          <div className="space-y-5">
-            {about.map((p, i) => (
-              <Reveal key={i} delay={i * 0.08}>
-                <p className="text-base leading-relaxed text-fog text-justify sm:text-lg">
-                  {p}
-                </p>
+      <div className="page grid gap-10 py-16 sm:py-20 lg:grid-cols-12 lg:gap-8 lg:py-28">
+        {/* portrait in a glass frame; the name plate floats above it */}
+        <GlossCard
+          wrapClassName="lg:col-span-4"
+          className="aspect-[4/5] overflow-clip lg:aspect-auto lg:min-h-[32rem]"
+          tilt={7}
+        >
+          <Picture
+            avif={portraitAvif}
+            src={portrait}
+            alt={profile.name}
+            width={900}
+            height={1062}
+            className="absolute inset-0 h-full w-full object-cover object-top"
+          />
+          <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/70 to-transparent" />
+          <div className="absolute inset-x-5 bottom-5 z-[3] rounded-2xl border border-white/15 bg-black/45 px-4 py-3 backdrop-blur-md">
+            <p className="text-sm font-semibold text-white">{profile.name}</p>
+            <p className="mt-0.5 text-xs text-white/70">
+              {profile.role} / {profile.title}, {profile.company}
+            </p>
+          </div>
+        </GlossCard>
+
+        <div className="lg:col-span-7 lg:col-start-6">
+          <Reveal>
+            <p className="kicker">{about.kicker}</p>
+            <h2 className="display-2 mt-4">{about.title}</h2>
+          </Reveal>
+          <div className="mt-7 space-y-5">
+            {about.paragraphs.map((p, i) => (
+              <Reveal key={i} delay={0.06 * (i + 1)}>
+                <p className="lede">{p}</p>
               </Reveal>
             ))}
           </div>
 
-          <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-4">
-            {stats.map((s, i) => (
-              <Reveal key={s.label} delay={0.1 + i * 0.06}>
-                <div className="gloss h-full rounded-2xl p-4">
-                  <div className="text-2xl font-semibold tracking-tight text-snow sm:text-3xl">
-                    <Counter value={s.value} />
+          <dl className="mt-10 grid gap-3 sm:grid-cols-2">
+            {about.facts.map((f, i) => {
+              const Icon = factIcons[i % factIcons.length];
+              return (
+                <GlossCard
+                  key={f.label}
+                  delay={0.05 * i}
+                  tilt={0}
+                  className="flex items-center gap-4 !rounded-2xl p-4"
+                >
+                  <span className="tile">
+                    <Icon size={18} />
+                  </span>
+                  <div>
+                    <dt className="kicker">{f.label}</dt>
+                    <dd className="mt-1.5 text-[15px] font-medium leading-snug">{f.value}</dd>
                   </div>
-                  <div className="mt-1 text-xs leading-snug text-mist">
-                    {s.label}
-                  </div>
-                </div>
-              </Reveal>
-            ))}
-          </div>
+                </GlossCard>
+              );
+            })}
+          </dl>
         </div>
       </div>
-    </Section>
+    </section>
   );
 }
